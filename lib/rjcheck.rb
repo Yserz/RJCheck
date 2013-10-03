@@ -12,9 +12,8 @@ require_relative 'rjcheck/mapper/java/java_mapper'
 
 
 puts "Please enter the folder of the project: "
-#folder = gets.chomp
-folder = "/Users/MacYser/Documents/Workspaces/NetBeansWorkspace/Zeta/zeta-server/"#src/main/java/com/wearezeta/server/http/exception/"
-folder = "/Users/MacYser/Documents/Workspaces/NetBeansWorkspace/JavaTestApp"
+folder = gets.chomp
+
 
 #puts "\n\n\n *** Crawl everything ***"
 #crawler = Crawler.new(folder)
