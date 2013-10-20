@@ -1,0 +1,350 @@
+/* Loading Blog Pages */
+@import url('../../pages/css/page.css');
+/* Loading Blog Components */
+@import url('../../components/css/article.css');
+@import url('../../components/css/comment.css');
+@import url('../../components/css/sourcecode.css');
+@import url('../../components/css/video.css');
+/* Loading Genaral CSS */
+@import url('layout.css');
+
+/*
+    Document   : ownblog
+    Created on : 07.06.2013, 00:06:12
+    Author     : Michael Koppen
+    Description:
+        Purpose of the stylesheet follows.
+*/
+a {
+	/* Specifies a hyperlink */
+}
+abbr {
+	/* Specifies an abbreviation */
+}
+address {
+	/* Specifies an address element */
+}
+area {
+	/* Specifies an area inside an image map */
+}
+article {
+	/* Specifies an article HTML5 */
+}
+aside {
+	/* Specifies content aside from the page content HTML5 */
+}
+audio {
+	/* Specifies sound content HTML5 */
+}
+b {
+	/* Specifies bold text */
+}
+base {
+	/* Specifies a base URL for all the links in a page */
+}
+bdi {
+	/* For bi-directional text formatting HTML5 */
+}
+bdo {
+	/* Specifies the direction of text display */
+}
+blockquote {
+	/* Specifies a long quotation */
+}
+body {
+	/* Specifies the body element */
+}
+br {
+	/* Inserts a single line break */
+}
+button {
+	/* Specifies a push button */
+}
+canvas {
+	/* Define graphics HTML5 */
+}
+caption {
+	/* Specifies a table caption */
+}
+cite {
+	/* Specifies a citation */
+}
+code {
+	/* Specifies computer code text */
+}
+col {
+	/* Specifies attributes for table columns  */
+}
+colgroup {
+	/* Specifies groups of table columns */
+}
+command {
+	/* Specifies a command HTML5 */
+}
+data {
+	/* Allows for machine-readable data to be provided HTML5 */
+}
+datagrid {
+	/* Allows for an interactive representation of tree, list, or tabular data HTML5 */
+}
+datalist {
+	/* Specifies an "autocomplete" dropdown list HTML5 */
+}
+dd {
+	/* Specifies a definition description */
+}
+del {
+	/* Specifies deleted text */
+}
+details {
+	/* Specifies details of an element HTML5 */
+}
+dfn {
+	/* Defines a definition term */
+}
+div {
+	/* Specifies a section in a document */
+}
+dl {
+	/* Specifies a definition list */
+}
+dt {
+	/* Specifies a definition term */
+}
+em {
+	/* Specifies emphasized text  */
+}
+embed {
+	/* Specifies external application or interactive content HTML5 */
+}
+eventsource {
+	/* Specifies a target for events sent by a server HTML5 */
+}
+fieldset {
+	/* Specifies a fieldset */
+}
+figcaption {
+	/* Specifies caption for the figure element. HTML5 */
+}
+figure {
+	/* Specifies a group of media content, and their caption HTML5 */
+}
+footer {
+	/* Specifies a footer for a section or page HTML5 */
+}
+form {
+	/* Specifies a form  */
+}
+h1 {
+	/*  Specifies a heading level 1 */
+}
+h2 {
+	/*  Specifies a heading level 2 */
+}
+h3 {
+	/*  Specifies a heading level 3 */
+}
+h4 {
+	/*  Specifies a heading level 4 */
+}
+h5 {
+	/*  Specifies a heading level 5 */
+}
+h6 {
+	/*  Specifies a heading level 6 */
+}
+head {
+	/* Specifies information about the document */
+}
+header {
+	/* Specifies a group of introductory or navigational aids, including hgroup elements HTML5 */
+}
+hgroup {
+	/* Specifies a header for a section or page HTML5 */
+}
+hr {
+	/*  Specifies a horizontal rule */
+}
+html {
+	/* Specifies an html document */
+}
+i {
+	/* Specifies italic text */
+}
+iframe {
+	/* Specifies an inline sub window (frame) */
+}
+img {
+	/* Specifies an image */
+}
+input {
+	/* Specifies an input field */
+}
+ins {
+	/* Specifies inserted text */
+}
+kbd {
+	/* Specifies keyboard text */
+}
+keygen {
+	/* Generates a key pair HTML5 */
+}
+label {
+	/* Specifies a label for a form control */
+}
+legend {
+	/* Specifies a title in a fieldset */
+}
+li {
+	/* Specifies a list item */
+}
+link {
+	/* Specifies a resource reference */
+}
+mark {
+	/* Specifies marked text HTML5 */
+}
+map {
+	/* Specifies an image map  */
+}
+menu {
+	/* Specifies a menu list */
+}
+meta {
+	/* Specifies meta information */
+}
+meter {
+	/* Specifies measurement within a predefined range HTML5 */
+}
+nav {
+	/* Specifies navigation links HTML5 */
+}
+noscript {
+	/* Specifies a noscript section */
+}
+object {
+	/* Specifies an embedded object */
+}
+ol {
+	/* Specifies an ordered list */
+}
+optgroup {
+	/* Specifies an option group */
+}
+option {
+	/* Specifies an option in a drop-down list */
+}
+output {
+	/* Specifies some types of output HTML5 */
+}
+p {
+	/* Specifies a paragraph */
+}
+param {
+	/* Specifies a parameter for an object */
+}
+pre {
+	/* Specifies preformatted text */
+}
+progress {
+	/* Specifies progress of a task of any kind HTML5 */
+}
+q {
+	/* Specifies a short quotation */
+}
+ruby {
+	/* Specifies a ruby annotation (used in East Asian typography) HTML5 */
+}
+rp {
+	/* Used for the benefit of browsers that don't support ruby annotations HTML5 */
+}
+rt {
+	/* Specifies the ruby text component of a ruby annotation. HTML5 */
+}
+s {
+	/* Indicates text that's no longer accurate or relevant. */
+}
+samp {
+	/* Specifies sample computer code */
+}
+script {
+	/* Specifies a script */
+}
+section {
+	/* Specifies a section HTML5 */
+}
+select {
+	/* Specifies a selectable list */
+}
+small {
+	/* Specifies small text */
+}
+source {
+	/* Specifies media resources HTML5 */
+}
+span {
+	/* Specifies a section in a document */
+}
+strong {
+	/* Specifies strong text */
+}
+style {
+	/* Specifies a style definition */
+}
+sub {
+	/* Specifies subscripted text */
+}
+summary {
+	/* Specifies a summary / caption for the <details> element HTML5 */
+}
+sup {
+	/* Specifies superscripted text */
+}
+table {
+	/* Specifies a table */
+}
+tbody {
+	/* Specifies a table body */
+}
+td {
+	/* Specifies a table cell */
+}
+textarea {
+	/* Specifies a text area */
+}
+tfoot {
+	/* Specifies a table footer */
+}
+th {
+	/* Specifies a table header */
+}
+thead {
+	/* Specifies a table header */
+}
+time {
+	/* Specifies a date/time HTML5 */
+}
+title {
+	/* Specifies the document title */
+}
+tr {
+	/* Specifies a table row */
+}
+track {
+	/* Specifies a text track for media such as video and audio HTML5 */
+}
+u {
+	/* Specifies text with a non-textual annotation. */
+}
+ul {
+	/* Specifies an unordered list */
+}
+var {
+	/* Specifies a variable */
+}
+video {
+	/* Specifies a video HTML5 */
+}
+wbr {
+	/* Specifies a line break opportunity for very long words and strings of text with no spaces. HTML5 */
+}

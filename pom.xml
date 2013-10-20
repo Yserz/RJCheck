@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>de.fhb</groupId>
+	<artifactId>TwiTempling</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>TwiTempling</name>
+	<modules>
+		<module>TwiTemplating</module>
+	</modules>
+	<repositories>
+		<repository>
+			<url>http://repository.primefaces.org/</url>
+			<id>PrimeFaces-maven-lib</id>
+			<layout>default</layout>
+			<name>Repository for library PrimeFaces-maven-lib</name>
+		</repository>
+	</repositories>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<!-- WAR plugins -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.1</version>
+					<configuration>
+						<source>1.7</source>
+						<target>1.7</target>
+						<compilerArguments>
+							<!-- show unchecked operations -->
+							<Xlint:unchecked/>
+							<endorseddirs>${endorsed.dir}</endorseddirs>
+						</compilerArguments>
+						<encoding>${project.build.sourceEncoding}</encoding>
+						<optimize>true</optimize>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>2.3</version>
+					<configuration>
+						<!--<outputFileNameMapping>@{groupId}@-@{artifactId}@-@{baseVersion}@@{dashClassifier?}@.@{extension}@</outputFileNameMapping>-->
+						<outputFileNameMapping>@{artifactId}@.@{extension}@</outputFileNameMapping>
+						<failOnMissingWebXml>false</failOnMissingWebXml>
+						<useCache>${war.useCache}</useCache>
+						<warName>${project.artifactId}</warName>
+					</configuration>
+					<executions>
+						<execution>
+							<!-- Never package WAR-file -->
+							<id>default-war</id>
+							<phase>never</phase>
+						</execution>
+						<execution>
+							<!-- Package exploded WAR-file -->
+							<id>war-exploded</id>
+							<phase>package</phase>
+							<goals>
+								<goal>exploded</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>2.4</version>
+					<executions>
+						<execution>
+							<!-- Never install exploded WAR-file -->
+							<id>default-install</id>
+							<phase>never</phase>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>2.6</version>
+					<executions>
+						<execution>
+							<phase>validate</phase>
+							<goals>
+								<goal>copy</goal>
+							</goals>
+							<configuration>
+								<outputDirectory>${endorsed.dir}</outputDirectory>
+								<silent>true</silent>
+								<artifactItems>
+									<artifactItem>
+										<groupId>javax</groupId>
+										<artifactId>javaee-endorsed-api</artifactId>
+										<version>7.0</version>
+										<type>jar</type>
+									</artifactItem>
+								</artifactItems>
+							</configuration>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
