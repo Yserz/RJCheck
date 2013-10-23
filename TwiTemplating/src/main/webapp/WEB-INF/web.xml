@@ -41,7 +41,7 @@
 		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
 	<!-- JSF -->
-	<!--	<servlet>
+	<servlet>
 		<servlet-name>Faces Servlet</servlet-name>
 		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
@@ -49,7 +49,7 @@
 	<servlet-mapping>
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.jsf</url-pattern>
-	</servlet-mapping>-->
+	</servlet-mapping>
 	<session-config>
 		<session-timeout>
 			30

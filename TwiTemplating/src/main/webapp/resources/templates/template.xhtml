@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui" >
+
+<f:view contentType="text/html">
+    <h:head>
+        <title><ui:insert name="title">Template</ui:insert></title>
+
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width,initial-scale = 1.0,maximum-scale = 1.0" />
+        <meta name="author" content="Michael Koppen" />
+        <meta name="copyright" content="Michael Koppen" />
+        <meta name="page-topic" content="" />
+        <meta name="page-type" content="" />
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+        <!--<meta name="robots" content="index, follow" />-->
+        <!-- INFO: Suchmaschine erlauben zu indizieren (mögliche werte: index, noindex,  follow, nofollow, all)-->
+        <meta name="robots" content="all" />
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <!--<meta http-equiv="Content-Type" content='text/html; charset=UTF-8' />-->
+        <meta http-equiv="content-language" content="de" />
+        <!-- INFO: cachen der Seite erlauben? -->
+        <!--<meta http-equiv="cache-control" content="no-cache" />-->
+        <!-- INFO: cachen der Seite für Proxies erlauben? -->
+        <!--<meta http-equiv="pragma" content="no-cache" />-->
+        <!-- INFO: Inhalt der Seite verfällt in 24 Stunden (86400 Sekunden) -->
+        <!--<meta http-equiv="expires" content="86400">-->
+        <!-- INFO: Automatisches weiterleiten an URL in 5 Sekunden -->
+        <!--<meta http-equiv="refresh" content="5; URL=datei.htm" />-->
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <h:outputStylesheet name="css/bootstrap/bootstrap.min.css"/>
+        <h:outputStylesheet name="css/bootstrap/bootstrap-responsive.css"/>
+        <h:outputStylesheet name="css/highlight/light/vs.css"/>
+        <h:outputStylesheet name="css/style.css"/>
+        <h:outputScript name="jquery/jquery.js" library="primefaces"/>
+        <h:outputScript name="vendor/bootstrap.min.js"/>
+        <h:outputScript name="vendor/holder.js"/>
+        <h:outputScript name="vendor/html5shiv.js"/>
+
+        <!-- Fav and touch icons -->
+        <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+        <link rel="shortcut icon" href="../assets/ico/favicon.png">-->
+
+    </h:head>
+    <h:body>
+
+        <div id="top">
+            <ui:insert name="top">
+                <div class="navbar-wrapper">
+                    <!-- Wrap the .navbar in .container to center it within the absolutely positioned parent. -->
+                    <div class="container">
+
+                        <div class="navbar navbar-inverse">
+                            <div class="navbar-inner">
+                                <!-- Responsive Navbar Part 1: Button for triggering responsive navbar (not covered in tutorial). Include responsive CSS to utilize. -->
+                                <button type="button" class="btn btn-navbar" data-toggle="collapse"
+                                        data-target=".nav-collapse">
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="brand" href="./index.html#!">TwiTemplating</a>
+                                <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
+                                <div class="nav-collapse collapse">
+                                    <ul class="nav">
+                                        <li id="naviHome"><a href="./index.html#!">Home</a></li>
+                                        <li id="naviLearn"><a href="./learn.html#!">Learn more</a></li>
+                                        <li id="naviExample"><a href="./blog.html#!">Example</a></li>
+                                        <!-- Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns -->
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b
+                                                    class="caret"></b></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#">Action</a></li>
+                                                <li><a href="#">Another action</a></li>
+                                                <li><a href="#">Something else here</a></li>
+                                                <li class="divider"></li>
+                                                <li class="nav-header">Nav header</li>
+                                                <li><a href="#">Separated link</a></li>
+                                                <li><a href="#">One more separated link</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--/.nav-collapse -->
+                            </div>
+                            <!-- /.navbar-inner -->
+                        </div>
+                        <!-- /.navbar -->
+
+                    </div>
+                    <!-- /.container -->
+                </div>
+                <!-- /.navbar-wrapper -->
+            </ui:insert>
+        </div>
+        <div id="content">
+            <ui:insert name="content">
+                Content
+            </ui:insert>
+        </div>
+        <footer>
+            <p class="pull-right"><a href="#">Back to top</a></p>
+
+            <p>&#169; 2013 Michael Koppen, Inc. &#183; <a href="#">Privacy</a> &#183; <a href="#">Terms</a></p>
+        </footer>
+
+    </h:body>
+</f:view>
+</html>
