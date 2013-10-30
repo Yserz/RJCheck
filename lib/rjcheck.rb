@@ -2,8 +2,8 @@
 
 require 'bundler/setup'
 Bundler.require(:default)
-require_relative 'rjcheck/meta_model/java/class'
-require_relative 'rjcheck/meta_model/java/interface'
+require_relative 'rjcheck/meta_model/java/java_class'
+require_relative 'rjcheck/meta_model/java/java_interface'
 require_relative 'rjcheck/meta_model/java/method'
 
 require_relative 'rjcheck/crawler/crawler'
@@ -26,3 +26,4 @@ file_list = Hash.new()
 java_crawler.crawl {|path,file| file_list[path]=file}
 #file_list.each { |key,value|  puts "key: #{key}\nvalue: #{value}"}
 file_list.each { |key,value|  java_mapper.map_file(key,value)}
+puts file_list.size
