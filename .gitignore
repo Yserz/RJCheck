@@ -1,2 +1,5 @@
 /doc/
 /nbproject/
+/.idea
+.DS_Store
+*.iml
