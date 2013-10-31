@@ -16,11 +16,16 @@
  */
 package de.fhb.twitemplating.enitiy;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -33,8 +38,11 @@ import java.util.Date;
  */
 @MappedSuperclass
 @EntityListeners(EntityListener.class)
-@XmlRootElement
-
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode
+@NoArgsConstructor
 public class BaseEntity implements Serializable {
 
   private static final long serialVersionUID = 1L;
@@ -42,48 +50,4 @@ public class BaseEntity implements Serializable {
   private Date created;
   @Temporal(value = TemporalType.TIMESTAMP)
   private Date lastModified;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        BaseEntity that = (BaseEntity) o;
-
-        if (!created.equals(that.created)) return false;
-        if (!lastModified.equals(that.lastModified)) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = created.hashCode();
-        result = 31 * result + lastModified.hashCode();
-        return result;
-    }
-
-    public BaseEntity() {
-
-    }
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
-
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    public Date getLastModified() {
-        return lastModified;
-    }
-
-    public void setLastModified(Date lastModified) {
-        this.lastModified = lastModified;
-    }
 }

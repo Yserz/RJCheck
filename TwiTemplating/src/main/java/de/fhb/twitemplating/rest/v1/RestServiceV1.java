@@ -24,7 +24,6 @@ import javax.ejb.Stateless;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -50,7 +49,7 @@ public class RestServiceV1 {
 
     @GET
     @Path("messages")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(jsonMediaType)
     public List<Message> getMessages(){
         return nyt.getMessages();
     }
