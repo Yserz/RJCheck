@@ -16,29 +16,42 @@
  */
 package de.fhb.twitemplating.rest.v1;
 
-import java.util.logging.Logger;
+import de.fhb.twitemplating.enitiy.Message;
+import de.fhb.twitemplating.nyt.service.NewYorkTimesLocal;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.interceptor.Interceptors;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.util.List;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Michael Koppen <michael.koppen@googlemail.com>
  */
 @Path("/v1/service")
-@Produces(MediaType.TEXT_PLAIN)
 @Stateless
 public class RestServiceV1 {
 
 	private static final Logger LOG = Logger.getLogger(RestServiceV1.class.getName());
+    final String jsonMediaType = "application/json;charset=utf-8";
+
+    @EJB
+    private NewYorkTimesLocal nyt;
 
 	@GET
 	@Path("ping")
 	public String ping() {
 		return "alive";
 	}
+
+    @GET
+    @Path("messages")
+    @Produces(MediaType.TEXT_PLAIN)
+    public List<Message> getMessages(){
+        return nyt.getMessages();
+    }
 }
