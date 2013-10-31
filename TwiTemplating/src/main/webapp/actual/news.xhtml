@@ -1,10 +1,12 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:f="http://java.sun.com/jsf/core" xmlns:h="http://java.sun.com/jsf/html"
         >
+
+
+
 
 <f:view>
     <ui:composition template="../resources/templates/template.xhtml">
@@ -14,6 +16,66 @@
         </ui:define>
         <ui:define name="content">
 
+            <script>
+                Webservice = (function() {
+                    var Webservice = {};
+
+                    Webservice.TT_WEBSERVICE_ADDRESS = "http://localhost:8080/";
+
+
+                    Webservice.messages = function() {
+                        $.ajax({
+                            type: "GET",
+                            dataType: "json",
+                            contentType: "application/json;charset=utf-8",
+                            url: Webservice.TT_WEBSERVICE_ADDRESS + "TwiTemplating/rest/v1/service/messages",
+                            cache: true,
+                            async: false,
+                            complete: function(jqXHR, textStatus) {
+                                switch (jqXHR.status) {
+                                    case 404:
+                                        console.log(jqXHR);
+                                        throw new Error("Resource Not Found: " + jqXHR.responseText);
+                                    case 500:
+                                        console.log(jqXHR);
+                                        throw new Error("Internal Server Error: " + jqXHR.responseJSON.errorMsg);
+                                    default:
+                                        console.log(jqXHR.responseText);
+                                        var json= JSON.parse(jqXHR.responseText);
+                                        json.forEach(function(data){
+                                            $("#content").append('<hr class="featurette-divider">'
+                                            + '</hr><div class="featurette">'
+                                            + '<img class="featurette-image pull-right" src="'+data.mediaURL+'"/>'
+                                            + '<h2 class="featurette-heading">'+ data.title+'</h2>' +
+                                                    '<p>'+data.message+'</p>' +
+                                                    '<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. ' +
+                                                    'Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, ' +
+                                                    'when an unknown printer took a galley of type and scrambled it to make a type specimen book. ' +
+                                                    'It has survived not only five centuries, but also the leap into electronic typesetting, ' +
+                                                    'remaining essentially unchanged. It was popularised in the 1960s with the release of ' +
+                                                    'Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing ' +
+                                                    'software like Aldus PageMaker including versions of Lorem Ipsum.</p>' +
+                                                    '<p>Lorem Ipsum is simply dummy text been the industry\'s standard dummy text ever since ' +
+                                                    'the 1500s, when an unknown printer took a galley of type and scrambled it to make a type ' +
+                                                    'specimen book. It has survived not only five centuries, but also the leap into electronic ' +
+                                                    'typesetting, remaining essentially unchanged. It was popularised in the 1960s with the ' +
+                                                    'release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop ' +
+                                                    'publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>' +
+                                                    '<p><a class="btn" href="#">View details &#187;</a></p></div><!--/row-->');
+
+
+
+
+                                        },json)
+                                }
+                            }
+                        });
+                    };
+                    return Webservice;
+                }());
+                Webservice.messages();
+            </script>
+            <hr class="featurette-divider"/>
         </ui:define>
     </ui:composition>
 </f:view>

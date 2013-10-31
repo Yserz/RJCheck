@@ -42,6 +42,7 @@
         <h:outputScript name="vendor/bootstrap.min.js"/>
         <h:outputScript name="vendor/holder.js"/>
         <h:outputScript name="vendor/html5shiv.js"/>
+        <h:outputScript name="vendor/highlight.js/highlight.pack.js"/>
 
         <!-- Fav and touch icons -->
         <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
@@ -102,10 +103,12 @@
                 <!-- /.navbar-wrapper -->
             </ui:insert>
         </div>
-        <div id="content">
-            <ui:insert name="content">
-                Content
-            </ui:insert>
+        <div class="container marketing">
+            <div id="content">
+                <ui:insert name="content">
+                    Content
+                </ui:insert>
+            </div>
         </div>
         <footer>
             <p class="pull-right"><a href="#">Back to top</a></p>
