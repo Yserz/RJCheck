@@ -18,7 +18,7 @@ public class Result {
 	public String getSmallImageURL() {
 		if (media != null && !media.isEmpty()) {
 			for (Media m : media) {
-				if (m.metaData.get(0).height > 400) {
+				if (m.metaData.get(0).height > 200) {
 					return m.metaData.get(0).url;
 				}
 			}
