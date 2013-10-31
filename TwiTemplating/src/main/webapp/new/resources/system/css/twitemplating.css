@@ -2,9 +2,6 @@
 @import url('../../pages/css/page.css');
 /* Loading Blog Components */
 @import url('../../components/css/article.css');
-@import url('../../components/css/comment.css');
-@import url('../../components/css/sourcecode.css');
-@import url('../../components/css/video.css');
 /* Loading Genaral CSS */
 @import url('layout.css');
 

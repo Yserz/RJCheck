@@ -1,5 +1,5 @@
-var blogPage = Handlebars.compile(TT.Renderer.requireTemplate("resources/pages/templates/blogPage.html").responseText);
-Handlebars.registerPartial("blogPage", blogPage);
+var newsPage = Handlebars.compile(TT.Renderer.requireTemplate("resources/pages/templates/newsPage.html").responseText);
+Handlebars.registerPartial("newsPage", newsPage);
 var articleList = Handlebars.compile(TT.Renderer.requireTemplate("resources/components/templates/articleList.html").responseText);
 Handlebars.registerPartial("articleList", articleList);
 var article = Handlebars.compile(TT.Renderer.requireTemplate("resources/components/templates/article.html").responseText);
@@ -7,7 +7,7 @@ Handlebars.registerPartial("article", article);
 
 
 $("head").append(TT.Renderer.basehead({}));
-$("body").append(blogPage({}));
+$("body").append(newsPage({}));
 $("#articleList").append(articleList({
 	"id": 1,
 	"name": "BlogName",
