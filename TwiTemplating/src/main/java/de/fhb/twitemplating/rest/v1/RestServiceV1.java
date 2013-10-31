@@ -36,7 +36,7 @@ import java.util.logging.Logger;
 public class RestServiceV1 {
 
 	private static final Logger LOG = Logger.getLogger(RestServiceV1.class.getName());
-    final String jsonMediaType = "application/json;charset=utf-8";
+    private final String jsonMediaType = "application/json;charset=utf-8";
 
     @EJB
     private NewYorkTimesLocal nyt;
