@@ -2,19 +2,22 @@
 
 require 'bundler/setup'
 Bundler.require(:default)
-require_relative 'rjcheck/meta_model/java/java_class'
-require_relative 'rjcheck/meta_model/java/java_interface'
-require_relative 'rjcheck/meta_model/java/method'
+require_relative 'imports'
 
-require_relative 'rjcheck/crawler/crawler'
-require_relative 'rjcheck/crawler/java/java_crawler'
-require_relative 'rjcheck/mapper/java/java_mapper'
-require_relative 'rjcheck/controller/main_controller'
 
-puts "Please enter the folder of the project: "
-folder = gets.chomp
-folder = "/Users/MacYser/Documents/Workspaces/NetBeansWorkspace/JavaTestApp"
 
-controller = MainController.new(folder)
-controller.run
+class Main
+	include Imports
+	def initialize
+		puts "Please enter the folder of the project: "
+		folder = gets.chomp
+		folder = "/Users/MacYser/Documents/Workspaces/NetBeansWorkspace/JavaTestApp"
+
+		controller = MainController.new(folder)
+		controller.run
+	end
+end
+
+Main.new()
+
 
