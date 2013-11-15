@@ -8,18 +8,21 @@ require 'imports'
 # RJCheck Doku
 class Main
 	include Imports
+
 	def initialize
 		puts 'Please enter the folder of the project: '
 		folder = gets.chomp
-		#folder = "/Users/MacYser/Documents/Workspaces/NetBeansWorkspace/JavaTestApp"
+		folder = "/Users/MacYser/Documents/Workspaces/NetBeansWorkspace/JavaTestApp"
 
-    val = DSLController.new()
-
+    DSLController.new()
 		controller = MainController.new(folder)
+
 		controller.run
+		
 	end
+
 end
 
 Main.new()
 
-load 'recipe.rb'
+
