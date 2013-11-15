@@ -31,39 +31,14 @@ class JavaMapper
 
   end
 
-        def map_file(path, text)
-          
-                class_regex = Regexp.new(Package_signature,Regexp::MULTILINE )
-                if text.match(class_regex)
-                        puts "Matches Class"
-                        puts "#{path} "#==> \n#{text.match(regex)}"
+	def map(file_list)
+		# TODO scan list
 
-                        match = class_regex.match(text)
-                        if match
-                                puts "Package: #{match[1]}"
-                        end
-                end
-                
-                class_regex = Regexp.new(Import_signature,Regexp::MULTILINE)
-                if text.match(class_regex)
-                        puts "Matches Import"
-                        puts "#{path} "#==> \n#{text.match(regex)}"
+		file_list.each { |key,value|  map_file(key,value)}
+	end
 
-                        #match = class_regex.match(text)
-                        match = text.scan(class_regex)
-                        if match
-                                match.each do |i|
-                                  #test = match[i]
-                                  i.each do |j|
-                                    puts "Import: #{j}"
-                                  end
-                                end
-                        end
-                end
-          
-          
-          
-                class_regex = Regexp.new(Class_signature,Regexp::MULTILINE )
+	def map_file(path, text)
+		class_regex = Regexp.new(Class_signature,Regexp::MULTILINE )
 
 
                 if text.match(class_regex)
