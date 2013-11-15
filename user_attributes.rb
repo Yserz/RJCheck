@@ -1,0 +1,2 @@
+node['project1']['project_folder']['path']                                = 'my/path/to/project_folder'
+project['main_source_folder']['source_folder']['path']                    = project['main_source_folder']['path'] + 'java/tmp/'

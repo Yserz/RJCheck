@@ -1,17 +1,19 @@
 #!/usr/bin/ruby
-
+$:.unshift('.')
 require 'bundler/setup'
 Bundler.require(:default)
-require_relative 'imports'
+require 'imports'
 
 
 # RJCheck Doku
 class Main
 	include Imports
 	def initialize
-		puts "Please enter the folder of the project: "
+		puts 'Please enter the folder of the project: '
 		folder = gets.chomp
-		folder = "/Users/MacYser/Documents/Workspaces/NetBeansWorkspace/JavaTestApp"
+		#folder = "/Users/MacYser/Documents/Workspaces/NetBeansWorkspace/JavaTestApp"
+
+    val = DSLController.new()
 
 		controller = MainController.new(folder)
 		controller.run
@@ -20,4 +22,4 @@ end
 
 Main.new()
 
-
+load 'recipe.rb'
