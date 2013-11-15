@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class JavaMapper - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/rjcheck/mapper/java/java_mapper.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">Object
+  
+</nav>
+
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-map_class">#map_class</a>
+    
+    <li ><a href="#method-i-map_file">#map_file</a>
+    
+    <li ><a href="#method-i-map_interface">#map_interface</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./Gemfile.html">Gemfile</a>
+  
+    <li class="file"><a href="./LICENSE.html">LICENSE</a>
+  
+    <li class="file"><a href="./README.html">README</a>
+  
+    <li class="file"><a href="./Rakefile.html">Rakefile</a>
+  
+    <li class="file"><a href="./doc/created_rid.html">created.rid</a>
+  
+    <li class="file"><a href="./nbproject/private/config_properties.html">config.properties</a>
+  
+    <li class="file"><a href="./nbproject/private/private_properties.html">private.properties</a>
+  
+    <li class="file"><a href="./nbproject/private/private_xml.html">private.xml</a>
+  
+    <li class="file"><a href="./nbproject/private/rake-d_txt.html">rake-d</a>
+  
+    <li class="file"><a href="./nbproject/project_properties.html">project.properties</a>
+  
+    <li class="file"><a href="./nbproject/project_xml.html">project.xml</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./Clazz.html">Clazz</a>
+  
+    <li><a href="./Crawler.html">Crawler</a>
+  
+    <li><a href="./File.html">File</a>
+  
+    <li><a href="./Interface.html">Interface</a>
+  
+    <li><a href="./JavaCrawler.html">JavaCrawler</a>
+  
+    <li><a href="./JavaMapper.html">JavaMapper</a>
+  
+    <li><a href="./Method.html">Method</a>
+  
+    <li><a href="./MyUnitTests.html">MyUnitTests</a>
+  
+    <li><a href="./TestJavaMapper.html">TestJavaMapper</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class JavaMapper</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <!-- Constants -->
+    <section id="constants-list" class="section">
+      <h3 class="section-header">Constants</h3>
+      <dl>
+      
+        <dt id="Abstract_signature">Abstract_signature
+        
+        <dd class="description"><p>matches _abstract</p>
+        
+      
+        <dt id="Class_signature">Class_signature
+        
+        <dd class="description"><p>matches package* public final static class Something extends Object&lt;&gt;
+implements List&lt;&gt; {…} TODO final static could be reversed, should
+also process Annotations</p>
+        
+      
+        <dt id="Classbody_signature">Classbody_signature
+        
+        <dd class="description"><p>matches *{*}</p>
+        
+      
+        <dt id="Classname_signature">Classname_signature
+        
+        <dd class="description"><p>matches _class_ArrayList&lt;Object&gt;</p>
+        
+      
+        <dt id="ExtendsOrImplements_signature">ExtendsOrImplements_signature
+        
+        <dd class="description"><p>matches _extends_Object&lt;&gt;_implements_List&lt;&gt; or
+implements_List&lt;&gt;_extends_Object&lt;&gt;</p>
+        
+      
+        <dt id="Extends_signature">Extends_signature
+        
+        <dd class="description"><p>matches _extends_ArrayList&lt;Object&gt;</p>
+        
+      
+        <dt id="Final_signature">Final_signature
+        
+        <dd class="description"><p>matches _final</p>
+        
+      
+        <dt id="Generic_signature">Generic_signature
+        
+        <dd class="description"><p>matches *package*</p>
+
+<pre>Package_signature = &quot;.*package.*&quot;</pre>
+
+<p>matches &lt;Object&gt;</p>
+        
+      
+        <dt id="Implements_signature">Implements_signature
+        
+        <dd class="description"><p>matches _implements_List&lt;Object&gt;,_List&lt;Object&gt;</p>
+        
+      
+        <dt id="Static_signature">Static_signature
+        
+        <dd class="description"><p>matches _static</p>
+        
+      
+        <dt id="Visability_signature">Visability_signature
+        
+        <dd class="description"><p>matches public protected or private</p>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/rjcheck/mapper/java/java_mapper.rb, line 29</span>
+      <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
+
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- new-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- new-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-map_class" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">map_class</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="map_class-source">
+            <pre><span class="ruby-comment"># File lib/rjcheck/mapper/java/java_mapper.rb, line 64</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">map_class</span>
+
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- map_class-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- map_class-method -->
+
+    
+      <div id="method-i-map_file" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">map_file</span><span
+            class="method-args">(path, text)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="map_file-source">
+            <pre><span class="ruby-comment"># File lib/rjcheck/mapper/java/java_mapper.rb, line 33</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">map_file</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">text</span>)
+        <span class="ruby-identifier">class_regex</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Class_signature</span>,<span class="ruby-constant">Regexp</span><span class="ruby-operator">::</span><span class="ruby-constant">MULTILINE</span> )
+
+
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">text</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">class_regex</span>)
+                <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Matches Class&quot;</span>
+                <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{path} &quot;</span><span class="ruby-comment">#==&gt; \n#{text.match(regex)}&quot;</span>
+
+                <span class="ruby-identifier">match</span> = <span class="ruby-identifier">class_regex</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">text</span>)
+                <span class="ruby-keyword">if</span> <span class="ruby-identifier">match</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Class-Head: #{match[1]}&quot;</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Class-Visability: #{match[2]}&quot;</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Class-Name: #{match[3]}&quot;</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Class-Extends: #{match[4]}&quot;</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Class-Extends: #{match[5]}&quot;</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Class-Implements: #{match[6]}&quot;</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Class-Implements: #{match[7]}&quot;</span>
+                        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Class-Body: #{match[8]}&quot;</span>
+                <span class="ruby-keyword">end</span>
+
+                <span class="ruby-identifier">groups</span> = <span class="ruby-identifier">text</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-identifier">class_regex</span>)
+                <span class="ruby-comment">#                    groups.each { |i| puts i }</span>
+                <span class="ruby-comment">#                    puts groups.last</span>
+        <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">text</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/.*/</span>)
+                <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Matches everything&quot;</span>
+                <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;#{path} ==&gt; \n#{text.match(class_regex)}&quot;</span>
+        <span class="ruby-keyword">else</span>
+                <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;matches nothing&quot;</span>
+        <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- map_file-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- map_file-method -->
+
+    
+      <div id="method-i-map_interface" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">map_interface</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="map_interface-source">
+            <pre><span class="ruby-comment"># File lib/rjcheck/mapper/java/java_mapper.rb, line 67</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">map_interface</span>
+
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- map_interface-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- map_interface-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.0.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+
