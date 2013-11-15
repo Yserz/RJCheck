@@ -10,6 +10,7 @@ require_relative 'rjcheck/crawler/java/java_crawler'
 require_relative 'rjcheck/mapper/java/java_mapper'
 require_relative 'rjcheck/controller/main_controller'
 
+# This is a module to aggregate all neccessary imports of the project
 module Imports
 
 end

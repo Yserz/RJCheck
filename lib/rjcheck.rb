@@ -5,7 +5,7 @@ Bundler.require(:default)
 require_relative 'imports'
 
 
-
+# RJCheck Doku
 class Main
 	include Imports
 	def initialize
