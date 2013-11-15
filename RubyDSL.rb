@@ -1,4 +1,37 @@
-## DSL_FILE
+
+
+## DOMAIN_FILE ######################################################################
+
+class ProjectFolder
+  attr_accessor :path
+  attr_accessor :main_source_folder
+  attr_accessor :main_test_folder
+  
+  def initialize(path)
+    @path = path
+  end
+  
+end
+
+#####################################################################################
+
+## LOGIC_FILE #######################################################################
+
+class DSLController
+
+  attr_accessor :project_folder
+
+  def project_folder(path)
+    yield path
+    @project_folder = ProjectFolder.new(path)
+  end
+end
+
+load 'DSL_FILE'
+
+#####################################################################################
+
+## DSL_FILE #########################################################################
 
 project_folder node['project1']['project_folder']['path'] do
   main_source_folder          node['project1']['project_folder']['main_source_folder']['path']
@@ -35,7 +68,9 @@ end
 load 'DEFAULT_ATTRIBUTES_FILE.rb'
 load 'USER_FILE.rb'
 
-## DEFAULT_ATTRIBUTES_FILE
+#####################################################################################
+
+## DEFAULT_ATTRIBUTES_FILE ##########################################################
 
 project = node['project1']['project_folder']
 
@@ -51,7 +86,9 @@ project['path'] = 'path/to/project_folder'
       project['main_test_folder']['test_folder']['type']                  = 'java'
     project['main_test_folder']['test_resources_folder']['path']          = project['main_test_folder']['path'] + 'resources/'
     
-## USER_FILE
+#####################################################################################
+    
+## USER_FILE ########################################################################
 
 node['project1']['project_folder']['path']                                = 'my/path/to/project_folder'
 project['main_source_folder']['source_folder']['path']                    = project['main_source_folder']['path'] + 'java/tmp/'
