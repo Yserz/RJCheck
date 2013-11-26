@@ -14,11 +14,11 @@ class Main
 		folder = gets.chomp
 		folder = "/Users/MacYser/Documents/Workspaces/NetBeansWorkspace/JavaTestApp"
 
-    DSLController.new()
+		DSLController.new()
 		controller = MainController.new(folder)
 
 		controller.run
-		
+
 	end
 
 end
