@@ -10,14 +10,14 @@ class Main
 	include Imports
 
 	def initialize
-		puts 'Please enter the folder of the project: '
-		folder = gets.chomp
-		folder = "/Users/MacYser/Documents/Workspaces/NetBeansWorkspace/JavaTestApp"
-
-		DSLController.new()
-		controller = MainController.new(folder)
-
-		controller.run
+		#		puts 'Please enter the folder of the project: '
+		#		folder = gets.chomp
+		#		folder = "/Users/MacYser/Documents/Workspaces/NetBeansWorkspace/JavaTestApp"
+		#
+		#		DSLController.new()
+		#		controller = MainController.new(folder)
+		#
+		#		controller.run
 
 	end
 
