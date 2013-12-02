@@ -33,29 +33,23 @@ class JavaMapper
 
         def map_file(path, text)
           
+                package = ""
                 class_regex = Regexp.new(Package_signature,Regexp::MULTILINE )
                 if text.match(class_regex)
-                        puts "Matches Class"
-                        puts "#{path} "#==> \n#{text.match(regex)}"
-
                         match = class_regex.match(text)
                         if match
-                                puts "Package: #{match[1]}"
+                                package = match[1]
                         end
                 end
                 
                 class_regex = Regexp.new(Import_signature,Regexp::MULTILINE)
+                import = Array.new
                 if text.match(class_regex)
-                        puts "Matches Import"
-                        puts "#{path} "#==> \n#{text.match(regex)}"
-
-                        #match = class_regex.match(text)
                         match = text.scan(class_regex)
                         if match
                                 match.each do |i|
-                                  #test = match[i]
                                   i.each do |j|
-                                    puts "Import: #{j}"
+                                    import.push(j)
                                   end
                                 end
                         end
@@ -66,44 +60,34 @@ class JavaMapper
                 class_regex = Regexp.new(Class_signature,Regexp::MULTILINE )
 
 
+                name = ""
+                abstract = false
+                final = false
+                visibility = ""
                 if text.match(class_regex)
-                        puts "Matches Class"
-                        puts "#{path} "#==> \n#{text.match(regex)}"
-
                         match = class_regex.match(text)
                         if match
                                 text = match[1]
-                                puts "Class-Head: #{match[1]}"
-                                puts "Class-Visability: #{match[2]}"
-                                puts "Class-Name: #{match[3]}"
-                                puts "Class-Extends: #{match[4]}"
+                                visibility = match[2]
+                                name = match[3]
+                                #puts "Class-Head: #{match[1]}"
+                                #puts "Class-Visability: #{match[2]}"
+                                #puts "Class-Name: #{match[3]}"
+                                #puts "Class-Extends: #{match[4]}"
                                 #puts "Class-Extends: #{match[5]}"
-                                puts "Class-Implements: #{match[5]}"
-                                puts "Class-Implements: #{match[6]}"
+                                #puts "Class-Implements: #{match[5]}"
+                                #puts "Class-Implements: #{match[6]}"
                                 #puts "Class-Body: #{match[8]}"
                         end
            
                         
                         if /\sfinal\s/.match(text)
-                                puts "Class is Final"
-                        else
-                                puts "Class is not Final"
-                        end
-                        
-                        if /\sstatic\s/.match(text)
-                                puts "Class is Static"
-                        else
-                                puts "Class is Not Static"
+                                final = true
                         end
                         
                         if /\sabstract\s/.match(text)
-                                puts "Class is Abstract"
-                        else
-                                puts "Class is Not Abstract"
+                                abstract = true
                         end
-              
-              
-                        puts "#{text}"
 
                         groups = text.scan(class_regex)
                         #                        groups.each { |i| puts i }
