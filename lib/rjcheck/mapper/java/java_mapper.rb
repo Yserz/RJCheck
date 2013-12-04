@@ -46,6 +46,7 @@ class JavaMapper
       match = class_regex.match(text)
       if match
         package = match[1]
+        puts "#{package}"
       end
     end
     
@@ -81,14 +82,14 @@ class JavaMapper
         text = match[1]
         visibility = match[2]
         name = match[3]
-        #puts "Class-Head: #{match[1]}"
-        #puts "Class-Visability: #{match[2]}"
-        #puts "Class-Name: #{match[3]}"
-        #puts "Class-Extends: #{match[4]}"
-        #puts "Class-Extends: #{match[5]}"
-        #puts "Class-Implements: #{match[5]}"
-        #puts "Class-Implements: #{match[6]}"
-        #puts "Class-Body: #{match[8]}"
+        puts "Class-Head: #{match[1]}"
+        puts "Class-Visability: #{match[2]}"
+        puts "Class-Name: #{match[3]}"
+        puts "Class-Extends: #{match[4]}"
+        puts "Class-Extends: #{match[5]}"
+        puts "Class-Implements: #{match[5]}"
+        puts "Class-Implements: #{match[6]}"
+        puts "Class-Body: #{match[8]}"
       end
            
                         
