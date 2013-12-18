@@ -1,3 +1,5 @@
+require 'imports'
+
 class JavaMapper
 	# matches \*package\*
 	Package_signature = "package\s([a-zA-Z.]+);"
@@ -13,8 +15,10 @@ class JavaMapper
 	Abstract_signature = "(?:\sabstract)?"
 	# matches public protected or private
 	Visability_signature = "(?:public|protected|private)?"
+  # match with types of java-files
+  Type_signature = "(class|interface|enum)"
 	# matches _class_ArrayList<Object>
-	Classname_signature = "[\s]?class\s([A-Z]{1}[a-zA-Z0-9]*#{Generic_signature})"
+	Classname_signature = "[\s]?#{Type_signature}\s([A-Z]{1}[a-zA-Z0-9]*#{Generic_signature})"
 	# matches _extends_ArrayList<Object>
 	Extends_signature = "\sextends\s([A-Z]{1}[a-zA-Z0-9]*#{Generic_signature})"
 	# matches _implements_List<Object>,_List<Object>
@@ -27,8 +31,10 @@ class JavaMapper
 	# TODO final static could be reversed, should also process Annotations
 	Class_signature = "((#{Visability_signature})#{Final_signature}#{Static_signature}#{Abstract_signature}#{Classname_signature}#{ExtendsOrImplements_signature})#{Classbody_signature}"
 
+  @java_map
+  
 	def initialize
-
+    @java_map = Hash.new()
   end
 
 	def map(file_list)
@@ -39,23 +45,57 @@ class JavaMapper
 
   def pre_mapping(text)
     # auslesen package, name, typ
-     
+    
     package = ""
     class_regex = Regexp.new(Package_signature,Regexp::MULTILINE )
     if text.match(class_regex)
       match = class_regex.match(text)
       if match
         package = match[1]
-        puts "#{package}"
       end
+    end
+    
+    class_regex = Regexp.new(Class_signature,Regexp::MULTILINE )
+
+    type=""
+		name = ""
+    abstract = false
+    final = false
+    visibility = ""
+    if text.match(class_regex)
+      match = class_regex.match(text)
+      if match
+        text = match[1]
+        visibility = match[2]
+        type = match[3]
+        name = match[4]
+      end
+      
+      if /\sfinal\s/.match(text)
+        final = true
+      end
+                        
+      if /\sabstract\s/.match(text)
+        abstract = true
+      end 
+    end
+    
+    if type=="class"
+      java_class = JavaClass.new(package, visibility, nil, name, nil, abstract, final, nil, nil, nil)
+      qual_name = package+"."+name
+      @java_map[qual_name] = java_class
+    end
+    
+    if type=="interface"
+      java_inter = JavaInterface.new(package, visibility, nil, name, nil, nil, nil)
+      qual_name = package+"."+name
+      @java_map[qual_name] = java_inter
     end
     
   end  
     
 	def map_file(path, text)
-    
-    
-                
+           
     class_regex = Regexp.new(Import_signature,Regexp::MULTILINE)
     import = Array.new
     if text.match(class_regex)
@@ -71,34 +111,18 @@ class JavaMapper
     
 		class_regex = Regexp.new(Class_signature,Regexp::MULTILINE )
 
-
-		name = ""
-    abstract = false
-    final = false
-    visibility = ""
     if text.match(class_regex)
       match = class_regex.match(text)
       if match
         text = match[1]
-        visibility = match[2]
-        name = match[3]
-        puts "Class-Head: #{match[1]}"
-        puts "Class-Visability: #{match[2]}"
-        puts "Class-Name: #{match[3]}"
-        puts "Class-Extends: #{match[4]}"
-        puts "Class-Extends: #{match[5]}"
-        puts "Class-Implements: #{match[5]}"
-        puts "Class-Implements: #{match[6]}"
-        puts "Class-Body: #{match[8]}"
-      end
-           
-                        
-      if /\sfinal\s/.match(text)
-        final = true
-      end
-                        
-      if /\sabstract\s/.match(text)
-        abstract = true
+#        puts "Class-Head: #{match[1]}"
+#        puts "Class-Visability: #{match[2]}"
+#        puts "Class-Name: #{match[3]}"
+#        puts "Class-Extends: #{match[4]}"
+#        puts "Class-Extends: #{match[5]}"
+#        puts "Class-Implements: #{match[5]}"
+#        puts "Class-Implements: #{match[6]}"
+#        puts "Class-Body: #{match[8]}"
       end
 
 			groups = text.scan(class_regex)
@@ -112,11 +136,8 @@ class JavaMapper
 		end
 	end
 
-	def map_class
-
-	end
+	def find_java_file(ikey)
+    @java_map[ikey]
+  end
   
-	def map_interface
-
-	end
 end

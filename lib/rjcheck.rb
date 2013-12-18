@@ -12,7 +12,7 @@ class Main
 	def initialize
 				puts 'Please enter the folder of the project: '
 				folder = gets.chomp
-				#folder = "/Users/MacYser/Documents/Workspaces/NetBeansWorkspace/JavaTestApp"
+				#folder = "D:\Eigene Dateien\Eigene Dokumente\NetBeansProjects\RubyTest"
 		
 				DSLController.new()
 				controller = MainController.new(folder)
