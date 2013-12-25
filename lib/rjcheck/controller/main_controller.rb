@@ -1,5 +1,3 @@
-
-
 class MainController
 	attr_accessor :folder
 	attr_accessor :crawler

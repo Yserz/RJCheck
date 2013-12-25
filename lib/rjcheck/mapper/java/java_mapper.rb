@@ -113,16 +113,17 @@ class JavaMapper
 
     if text.match(class_regex)
       match = class_regex.match(text)
+			puts text
       if match
         text = match[1]
-#        puts "Class-Head: #{match[1]}"
-#        puts "Class-Visability: #{match[2]}"
-#        puts "Class-Name: #{match[3]}"
-#        puts "Class-Extends: #{match[4]}"
-#        puts "Class-Extends: #{match[5]}"
-#        puts "Class-Implements: #{match[5]}"
-#        puts "Class-Implements: #{match[6]}"
-#        puts "Class-Body: #{match[8]}"
+        puts "Class-Head: #{match[1]}"
+        puts "Class-Visability: #{match[2]}"
+        puts "Class-Name: #{match[3]}"
+        puts "Class-Extends: #{match[4]}"
+        puts "Class-Extends: #{match[5]}"
+        puts "Class-Implements: #{match[5]}"
+        puts "Class-Implements: #{match[6]}"
+        puts "Class-Body: #{match[8]}"
       end
 
 			groups = text.scan(class_regex)
