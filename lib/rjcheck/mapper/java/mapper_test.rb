@@ -6,13 +6,9 @@
 #
 
 class MapperTest
-	attr_accessor :folder
-	#attr_accessor :crawler
 	attr_accessor :mapper
 	
-  def initialize(folder)
-		@folder = folder
-		#@crawler = JavaCrawler.new(@folder)
+  def initialize()
 		@mapper = JavaMapper.new()
   end
 
@@ -27,7 +23,21 @@ class MapperTest
 		
 		puts "start test"
 		
-		#map(file_list)
+		map("package de.fhb.autobday.manager;
+
+import de.fhb.autobday.dao.*;
+import de.fhb.autobday.data.*;
+import de.fhb.autobday.manager.group.GroupManager;
+
+
+/**
+ * Test
+ */
+@RunWith(PowerMockRunner.class)
+public class ABDManagerTest extends Superclass implements TestClass{
+
+}")
+		
 	end
 
 	def crawl
@@ -38,7 +48,7 @@ class MapperTest
 	end
 
 	def map(file_text)
-		@mapper.map_file("here should be path",file_text)
+		@mapper.map_file("ABDManagerTest",file_text)
 	end
 end
 

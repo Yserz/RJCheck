@@ -11,6 +11,7 @@ class Main
 
 	def initialize
 
+		# switch here to execute the normal run method or test method
 		#run_controller()
 		run_test()
 
@@ -22,18 +23,14 @@ class Main
 		#folder = "D:\Eigene Dateien\Eigene Dokumente\NetBeansProjects\RubyTest"
 		
 		DSLController.new()
-		controller = MainController.new(folder)
-		
+		controller = Main::MainController.new(folder)
 		controller.run
-		runTest
-
 	end
 	
+	#only for testing mapper at the moment
 	def run_test
-		
 		test = MapperTest.new()
 		test.run()
-		
 	end
 
 end
