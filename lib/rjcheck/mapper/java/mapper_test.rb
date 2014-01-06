@@ -5,13 +5,14 @@
 #
 #
 
-class MainController
+class MapperTest
 	attr_accessor :folder
-	attr_accessor :crawler
+	#attr_accessor :crawler
 	attr_accessor :mapper
+	
   def initialize(folder)
 		@folder = folder
-		@crawler = JavaCrawler.new(@folder)
+		#@crawler = JavaCrawler.new(@folder)
 		@mapper = JavaMapper.new()
   end
 
@@ -21,8 +22,9 @@ class MainController
 		#crawler = Crawler.new(folder)
 		#crawler.crawl {|file| puts "InData: #{file}"}
 
-		file_list = crawl
-		file_list.each { |key,value|  puts "\n\nLOG: key: #{key}\nvalue: #{value}"}
+		#file_list = crawl
+		#file_list.each { |key,value|  puts "\n\nLOG: key: #{key}\nvalue: #{value}"}
+		
 		map(file_list)
 	end
 
