@@ -81,13 +81,13 @@ class JavaMapper
     end
     
     if type=="class"
-      java_class = JavaClass.new(package, visibility, nil, name, nil, abstract, final, nil, nil, nil)
+      java_class = JavaClass.new(package, visibility, Array.new, name, nil, abstract, final, nil, nil, nil)
       qual_name = package+"."+name
       @java_map[qual_name] = java_class
     end
     
     if type=="interface"
-      java_inter = JavaInterface.new(package, visibility, nil, name, nil, nil, nil)
+      java_inter = JavaInterface.new(package, visibility, Array.new, name, nil, nil, nil)
       qual_name = package+"."+name
       @java_map[qual_name] = java_inter
     end
@@ -95,7 +95,7 @@ class JavaMapper
   end  
     
 	def map_file(path, text)
-           
+       
     class_regex = Regexp.new(Import_signature,Regexp::MULTILINE)
     import = Array.new
     if text.match(class_regex)
@@ -109,23 +109,37 @@ class JavaMapper
       end
     end
     
-		class_regex = Regexp.new(Class_signature,Regexp::MULTILINE )
-
+		package = ""
+    class_regex = Regexp.new(Package_signature,Regexp::MULTILINE )
     if text.match(class_regex)
       match = class_regex.match(text)
-			puts text
       if match
-        text = match[1]
-        puts "Class-Head: #{match[1]}"
-        puts "Class-Visability: #{match[2]}"
-        puts "Class-Name: #{match[3]}"
-        puts "Class-Extends: #{match[4]}"
-        puts "Class-Extends: #{match[5]}"
-        puts "Class-Implements: #{match[5]}"
-        puts "Class-Implements: #{match[6]}"
-        puts "Class-Body: #{match[8]}"
+        package = match[1]
+      end
+    end
+    
+    class_regex = Regexp.new(Class_signature,Regexp::MULTILINE )
+
+		name = ""
+    if text.match(class_regex)
+      match = class_regex.match(text)
+      if match
+        name = match[4]
       end
 
+      object = @java_map[package+"."+name]  
+      
+      if object != nil
+        import.each do |i|
+          help = @java_map[i]
+          if help != nil
+            object.imports.push(help)
+          end
+        end
+      end
+      
+      object.output;
+      
 			groups = text.scan(class_regex)
 			#                        groups.each { |i| puts i }
 			#                        puts groups.last
