@@ -10,15 +10,30 @@ class Main
 	include Imports
 
 	def initialize
-				puts 'Please enter the folder of the project: '
-				folder = gets.chomp
-				#folder = "D:\Eigene Dateien\Eigene Dokumente\NetBeansProjects\RubyTest"
-		
-				DSLController.new()
-				controller = MainController.new(folder)
-		
-				controller.run
 
+		#run_controller()
+		run_test()
+
+	end
+	
+	def run_controller
+		puts 'Please enter the folder of the project: '
+		folder = gets.chomp
+		#folder = "D:\Eigene Dateien\Eigene Dokumente\NetBeansProjects\RubyTest"
+		
+		DSLController.new()
+		controller = MainController.new(folder)
+		
+		controller.run
+		runTest
+
+	end
+	
+	def run_test
+		
+		test = MapperTest.new()
+		test.run()
+		
 	end
 
 end

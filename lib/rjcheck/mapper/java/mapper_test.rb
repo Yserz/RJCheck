@@ -25,7 +25,9 @@ class MapperTest
 		#file_list = crawl
 		#file_list.each { |key,value|  puts "\n\nLOG: key: #{key}\nvalue: #{value}"}
 		
-		map(file_list)
+		puts "start test"
+		
+		#map(file_list)
 	end
 
 	def crawl
@@ -35,7 +37,10 @@ class MapperTest
 		file_list
 	end
 
-	def map(file_list)
-		@mapper.map(file_list)
+	def map(file_text)
+		@mapper.map_file("here should be path",file_text)
 	end
 end
+
+
+
