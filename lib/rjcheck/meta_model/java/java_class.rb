@@ -29,7 +29,7 @@ class JavaClass < JavaWithGeneric
 		puts "Abstract: #{@abstract}"
 		
     @implements.each do |item|
-      puts "#{item.identifier}"
+      puts "#{item}"
     end
 		
 		super_output()

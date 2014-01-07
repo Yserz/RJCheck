@@ -142,7 +142,7 @@ class JavaMapper
       end
     end
     
-	 #search for package
+		#search for package
 		package = ""
     class_regex = Regexp.new(Package_signature,Regexp::MULTILINE )
     if text.match(class_regex)
@@ -166,22 +166,18 @@ class JavaMapper
 
 			# get the object in array for current class
       object = @java_map[package+"."+name]  
-      # was passiert hier? bitte mehr kommentare! oder extract method!
+      # save searched iformations into current class object
       if object != nil
-        import.each do |i|
-          help = @java_map[i]
-          if help != nil
-            object.imports.push(help)
-          end
+        import.each do |item|
+					object.imports.push(item)
         end
+				implements.each do |item|
+					object.implements.push(item)
+				end
       end
 			
 			# prints out the mapped paramter
       object.output;
-
-			implements.each do |item|
-				puts "#{item}"
-			end
       
 			groups = text.scan(class_regex)
 			#                        groups.each { |i| puts i }

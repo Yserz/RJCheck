@@ -12,8 +12,8 @@ class MapperTest
 		#map this hardcoded class
 		map("package de.fhb.autobday.manager;
 
-				import de.fhb.autobday.dao.*;
-				import de.fhb.autobday.data.*;
+				import de.fhb.autobday.dao.GroupDAO;
+				import de.fhb.autobday.data.GroupVO;
 				import de.fhb.autobday.manager.group.GroupManager;
 
 				/**
