@@ -14,7 +14,7 @@ class JavaMapper
 	# matches _abstract
 	Abstract_signature = "(?:\sabstract)?"
 	# matches public protected or private
-	Visability_signature = "(?:public|protected|private)?"
+	Visibility_signature = "(?:public|protected|private)?"
   # match with types of java-files
   Type_signature = "(class|interface|enum)"
 	# matches _class_ArrayList<Object>
@@ -29,7 +29,7 @@ class JavaMapper
 	Classbody_signature = ".*?(\{.*\})"
 	# matches package\* public final static class Something extends Object<> implements List<> {...}
 	# TODO final static could be reversed, should also process Annotations
-	Class_signature = "((#{Visability_signature})#{Final_signature}#{Static_signature}#{Abstract_signature}#{Classname_signature}#{ExtendsOrImplements_signature})#{Classbody_signature}"
+	Class_signature = "((#{Visibility_signature})#{Final_signature}#{Static_signature}#{Abstract_signature}#{Classname_signature}#{ExtendsOrImplements_signature})#{Classbody_signature}"
 
   @java_map
   
@@ -85,99 +85,128 @@ class JavaMapper
       end 
     end
 		
-		#TODO annotations
+		#initialze missing fields
 		annotations = Array.new
-		#TODO implements
 		implements = Array.new
-    #TODO extends
 		extends=""
-		#TODO generics
 		generics=""
-		#TODO imports
 		imports=Array.new;
 		
-    if type=="class"
-      java_class = JavaClass.new(package, visibility, imports, name, annotations, abstract, final, implements, extends, generics)
-      qual_name = package+"."+name
-      @java_map[qual_name] = java_class
-    end
+		# create objects into java_map for class or interface
+		if type=="class"
+			java_class = JavaClass.new(package, visibility, imports, name, annotations, abstract, final, implements, extends, generics)
+			qual_name = package+"."+name
+			@java_map[qual_name] = java_class
+		end
     
-    if type=="interface"
-      java_inter = JavaInterface.new(package, visibility, Array.new, name, nil, nil, nil)
-      qual_name = package+"."+name
-      @java_map[qual_name] = java_inter
-    end
+		if type=="interface"
+			java_inter = JavaInterface.new(package, visibility, Array.new, name, nil, nil, nil)
+			qual_name = package+"."+name
+			@java_map[qual_name] = java_inter
+		end
     
-  end  
+	end  
     
 	#before using map_file it is fundamental to use pre_mapping
 	def map_file(path, text)
+		
+		annotations = Array.new
+		implements = Array.new
+		import=Array.new;
+		extends = nil
+		generics = ""
+		
+		#TODO annotations
+		#TODO generics
+		#TODO extends
+		
+		#search for extends
+		class_regex = Regexp.new(Extends_signature,Regexp::MULTILINE)
+		if text.match(class_regex)
+			match = class_regex.match(text)
+			if match
+				extends = match[1]
+				puts "extends: #{extends}"
+				#TODO find object
+			end
+		end
      
 		#search for implements
-    class_regex = Regexp.new(Implements_signature,Regexp::MULTILINE)
-    implements = Array.new
-    if text.match(class_regex)
-      match = text.scan(class_regex)
-      if match
-        match.each do |i|
-          i.each do |j|
-            implements.push(j)
+		class_regex = Regexp.new(Implements_signature,Regexp::MULTILINE)
+		if text.match(class_regex)
+			match = text.scan(class_regex)
+			if match
+				match.each do |i|
+					i.each do |j|
+						implements.push(j)
 						#puts "Implements: #{implements}"
-          end
-        end
-      end
-    end
+					end
+				end
+			end
+		end
 		
 		#search for imports
 		class_regex = Regexp.new(Import_signature,Regexp::MULTILINE)
-    import = Array.new
-    if text.match(class_regex)
-      match = text.scan(class_regex)
-      if match
-        match.each do |i|
-          i.each do |j|
-            import.push(j)
-          end
-        end
-      end
-    end
+		if text.match(class_regex)
+			match = text.scan(class_regex)
+			if match
+				match.each do |i|
+					i.each do |j|
+						import.push(j)
+					end
+				end
+			end
+		end
     
 		#search for package
 		package = ""
-    class_regex = Regexp.new(Package_signature,Regexp::MULTILINE )
-    if text.match(class_regex)
-      match = class_regex.match(text)
-      if match
-        package = match[1]
+		class_regex = Regexp.new(Package_signature,Regexp::MULTILINE )
+		if text.match(class_regex)
+			match = class_regex.match(text)
+			if match
+				package = match[1]
 				#puts "Package-Name: #{package}"
-      end
-    end
+			end
+		end
     
 		
 		#search for class
-    class_regex = Regexp.new(Class_signature,Regexp::MULTILINE )
+		class_regex = Regexp.new(Class_signature,Regexp::MULTILINE )
 		name = ""
-    if text.match(class_regex)
-      match = class_regex.match(text)
-      if match
-        name = match[4]
+		if text.match(class_regex)
+			match = class_regex.match(text)
+			if match
+				name = match[4]
 				#puts "Class-Name: #{name}"
-      end
+			end
 
 			# get the object in array for current class
-      object = @java_map[package+"."+name]  
-      # save searched iformations into current class object
-      if object != nil
-        import.each do |item|
-					object.imports.push(item)
+			object = @java_map[package+"."+name]  
+			# save searched iformations into current class object
+			if object != nil
+				#import.each do |item|
+				#	object.imports.push(item)
+				#end
+				import.each do |i|
+          help = @java_map[i]
+          if help != nil
+            object.imports.push(help)
+          end
         end
-				implements.each do |item|
-					object.implements.push(item)
-				end
-      end
+					
+				#implements.each do |item|
+				#	object.implements.push(item)
+				#end
+				import.each do |i|
+          help = @java_map[i]
+          if help != nil
+            object.implements.push(help)
+          end
+        end
+			end
 			
 			# prints out the mapped paramter
-      object.output;
+			object.output;
       
 			groups = text.scan(class_regex)
 			#                        groups.each { |i| puts i }
@@ -191,7 +220,7 @@ class JavaMapper
 	end
 
 	def find_java_file(ikey)
-    @java_map[ikey]
-  end
-  
+		@java_map[ikey]
+	end
+		
 end

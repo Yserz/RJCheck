@@ -12,7 +12,7 @@ class JavaInterface < JavaWithGeneric
   end
 	
 	def output
-		puts "Extends: #{@extends}"
+		puts "Extends: #{@extends.identifier}"
 		super_output()
 
 	end
