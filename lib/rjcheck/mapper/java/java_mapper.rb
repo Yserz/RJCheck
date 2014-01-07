@@ -70,6 +70,10 @@ class JavaMapper
         visibility = match[2]
         type = match[3]
         name = match[4]
+				#puts "text: #{text}"
+				#puts "visibility: #{visibility}"
+				#puts "type: #{type}"
+				#puts "name: #{name}"
       end
       
       if /\sfinal\s/.match(text)
@@ -80,9 +84,20 @@ class JavaMapper
         abstract = true
       end 
     end
-    
+		
+		#TODO annotations
+		annotations = Array.new
+		#TODO implements
+		implements = Array.new
+    #TODO extends
+		extends=""
+		#TODO generics
+		generics=""
+		#TODO imports
+		imports=Array.new;
+		
     if type=="class"
-      java_class = JavaClass.new(package, visibility, Array.new, name, nil, abstract, final, nil, nil, nil)
+      java_class = JavaClass.new(package, visibility, imports, name, annotations, abstract, final, implements, extends, generics)
       qual_name = package+"."+name
       @java_map[qual_name] = java_class
     end
@@ -97,8 +112,24 @@ class JavaMapper
     
 	#before using map_file it is fundamental to use pre_mapping
 	def map_file(path, text)
-       
-    class_regex = Regexp.new(Import_signature,Regexp::MULTILINE)
+     
+		#search for implements
+    class_regex = Regexp.new(Implements_signature,Regexp::MULTILINE)
+    implements = Array.new
+    if text.match(class_regex)
+      match = text.scan(class_regex)
+      if match
+        match.each do |i|
+          i.each do |j|
+            implements.push(j)
+						#puts "Implements: #{implements}"
+          end
+        end
+      end
+    end
+		
+		#search for imports
+		class_regex = Regexp.new(Import_signature,Regexp::MULTILINE)
     import = Array.new
     if text.match(class_regex)
       match = text.scan(class_regex)
@@ -111,6 +142,7 @@ class JavaMapper
       end
     end
     
+	 #search for package
 		package = ""
     class_regex = Regexp.new(Package_signature,Regexp::MULTILINE )
     if text.match(class_regex)
@@ -121,8 +153,9 @@ class JavaMapper
       end
     end
     
+		
+		#search for class
     class_regex = Regexp.new(Class_signature,Regexp::MULTILINE )
-
 		name = ""
     if text.match(class_regex)
       match = class_regex.match(text)
@@ -131,6 +164,7 @@ class JavaMapper
 				#puts "Class-Name: #{name}"
       end
 
+			# get the object in array for current class
       object = @java_map[package+"."+name]  
       # was passiert hier? bitte mehr kommentare! oder extract method!
       if object != nil
@@ -141,9 +175,13 @@ class JavaMapper
           end
         end
       end
-      
+			
 			# prints out the mapped paramter
       object.output;
+
+			implements.each do |item|
+				puts "#{item}"
+			end
       
 			groups = text.scan(class_regex)
 			#                        groups.each { |i| puts i }

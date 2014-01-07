@@ -1,9 +1,3 @@
-# To change this template, choose Tools | Templates
-# and open the template in the editor.
-#
-#
-#
-#
 
 class MapperTest
 	attr_accessor :mapper
@@ -26,17 +20,10 @@ class MapperTest
 				 * Test
 				 */
 				@RunWith(PowerMockRunner.class)
-				public class ABDManagerTest extends TestClass{
+				public class ABDManagerTest extends TestClass implements InterfaceIdentifier{
 
 				}")
 		
-	end
-
-	def crawl
-		puts "\n\n\n *** Crawl Java ***"
-		file_list = Hash.new()
-		@crawler.crawl {|path,file| file_list[path]=file}
-		file_list
 	end
 
 	def map(file_text)
