@@ -94,6 +94,7 @@ class JavaMapper
     
   end  
     
+	#??????????
 	def map_file(path, text)
        
     class_regex = Regexp.new(Import_signature,Regexp::MULTILINE)
@@ -115,6 +116,7 @@ class JavaMapper
       match = class_regex.match(text)
       if match
         package = match[1]
+				puts "Package-Name: #{package}"
       end
     end
     
@@ -125,10 +127,11 @@ class JavaMapper
       match = class_regex.match(text)
       if match
         name = match[4]
+				puts "Class-Name: #{name}"
       end
 
       object = @java_map[package+"."+name]  
-      
+      # was passiert hier? bitte mehr kommentare! oder extract method!
       if object != nil
         import.each do |i|
           help = @java_map[i]
@@ -138,7 +141,8 @@ class JavaMapper
         end
       end
       
-      object.output;
+			# hier isn Fehler ... undefined method output for nilClass
+      #object.output;
       
 			groups = text.scan(class_regex)
 			#                        groups.each { |i| puts i }

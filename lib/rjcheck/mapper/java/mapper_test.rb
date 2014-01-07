@@ -12,31 +12,24 @@ class MapperTest
 		@mapper = JavaMapper.new()
   end
 
-	def run
-
-		#puts "\n\n\n *** Crawl everything ***"
-		#crawler = Crawler.new(folder)
-		#crawler.crawl {|file| puts "InData: #{file}"}
-
-		#file_list = crawl
-		#file_list.each { |key,value|  puts "\n\nLOG: key: #{key}\nvalue: #{value}"}
-		
+	def run		
 		puts "start test"
 		
+		#map this hardcoded class
 		map("package de.fhb.autobday.manager;
 
-import de.fhb.autobday.dao.*;
-import de.fhb.autobday.data.*;
-import de.fhb.autobday.manager.group.GroupManager;
+				import de.fhb.autobday.dao.*;
+				import de.fhb.autobday.data.*;
+				import de.fhb.autobday.manager.group.GroupManager;
 
 
-/**
- * Test
- */
-@RunWith(PowerMockRunner.class)
-public class ABDManagerTest extends Superclass implements TestClass{
+				/**
+				 * Test
+				 */
+				@RunWith(PowerMockRunner.class)
+				public class ABDManagerTest extends Superclass implements TestClass{
 
-}")
+				}")
 		
 	end
 
@@ -49,6 +42,7 @@ public class ABDManagerTest extends Superclass implements TestClass{
 
 	def map(file_text)
 		@mapper.map_file("ABDManagerTest",file_text)
+		#@mapper.pre_mapping(file_text)
 	end
 end
 
