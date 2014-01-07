@@ -217,6 +217,7 @@ class JavaMapper
 		else
 			warn "matches nothing"
 		end
+		object
 	end
 
 	def find_java_file(ikey)
