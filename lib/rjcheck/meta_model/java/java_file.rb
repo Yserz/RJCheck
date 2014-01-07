@@ -20,10 +20,17 @@ class JavaFile
   end
   
   def output
-    puts "Package:#{@package}"
-    puts "Name:#{@identifier}"
+    puts "Package: #{@package}"
+    puts "Visibility: #{@visibility}"
+		puts "Name: #{@identifier}"
+		
     @imports.each do |item|
       puts "#{item.identifier}"
     end
+		
+		@annotations.each do |item|
+      puts "#{item.identifier}"
+    end
+		
   end
 end
