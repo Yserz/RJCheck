@@ -43,8 +43,9 @@ class JavaMapper
 		file_list.each { |key,value|  map_file(key,value)}
 	end
 
+	# creates entries in @java_map for mapping method 
   def pre_mapping(text)
-    # auslesen package, name, typ
+    # read out package, name, typ
     
     package = ""
     class_regex = Regexp.new(Package_signature,Regexp::MULTILINE )
@@ -94,7 +95,7 @@ class JavaMapper
     
   end  
     
-	#??????????
+	#before using map_file it is fundamental to use pre_mapping
 	def map_file(path, text)
        
     class_regex = Regexp.new(Import_signature,Regexp::MULTILINE)
@@ -116,7 +117,7 @@ class JavaMapper
       match = class_regex.match(text)
       if match
         package = match[1]
-				puts "Package-Name: #{package}"
+				#puts "Package-Name: #{package}"
       end
     end
     
@@ -127,7 +128,7 @@ class JavaMapper
       match = class_regex.match(text)
       if match
         name = match[4]
-				puts "Class-Name: #{name}"
+				#puts "Class-Name: #{name}"
       end
 
       object = @java_map[package+"."+name]  
@@ -141,8 +142,8 @@ class JavaMapper
         end
       end
       
-			# hier isn Fehler ... undefined method output for nilClass
-      #object.output;
+			# prints out the mapped paramter
+      object.output;
       
 			groups = text.scan(class_regex)
 			#                        groups.each { |i| puts i }

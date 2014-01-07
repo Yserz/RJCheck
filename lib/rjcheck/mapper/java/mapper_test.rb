@@ -22,12 +22,11 @@ class MapperTest
 				import de.fhb.autobday.data.*;
 				import de.fhb.autobday.manager.group.GroupManager;
 
-
 				/**
 				 * Test
 				 */
 				@RunWith(PowerMockRunner.class)
-				public class ABDManagerTest extends Superclass implements TestClass{
+				public class ABDManagerTest extends TestClass{
 
 				}")
 		
@@ -41,8 +40,8 @@ class MapperTest
 	end
 
 	def map(file_text)
+		@mapper.pre_mapping(file_text)
 		@mapper.map_file("ABDManagerTest",file_text)
-		#@mapper.pre_mapping(file_text)
 	end
 end
 
