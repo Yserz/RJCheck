@@ -13,7 +13,7 @@ require 'rjcheck/mapper/java/mapper_test'
 require 'rjcheck/controller/main_controller'
 
 require 'rjcheck/dsl/controller/dsl_controller'
-require 'rjcheck/dsl/model/project_folder'
+#require 'rjcheck/dsl/model/project_folder'
 
 # This is a module to aggregate all neccessary imports of the project
 module Imports

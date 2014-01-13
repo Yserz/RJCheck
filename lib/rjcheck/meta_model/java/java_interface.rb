@@ -1,8 +1,8 @@
 require_relative('java_with_generic')
 class JavaInterface < JavaWithGeneric
-	
+
 	alias :super_output :output
-	
+
   # List<JavaInterface>
   attr_accessor :extends
 
@@ -10,11 +10,12 @@ class JavaInterface < JavaWithGeneric
     super(package, visibility, imports, identifier, annotations, generic)
     @extends = extends
   end
-	
-	def output
-		puts "Extends: #{@extends.identifier}"
-		super_output()
 
+	def output
+
+		super_output()
+		#nullpointer here
+		#		puts "Extends: #{@extends.identifier}"
 	end
-	
+
 end

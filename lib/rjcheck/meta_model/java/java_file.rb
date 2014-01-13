@@ -18,21 +18,24 @@ class JavaFile
     @annotations = annotations
     @identifier = identifier
   end
-  
+
   def output
+		puts "\n######################################################"
     puts "Package: #{@package}"
     puts "Visibility: #{@visibility}"
 		puts "Name: #{@identifier}"
-		
+
 		puts "Imports: \n"
     @imports.each do |item|
       puts "#{item}"
     end
-		
+
 		puts "Annotations: \n"
-		@annotations.each do |item|
-      puts "#{item}"
+		if @annotations != nil
+			@annotations.each do |item|
+				puts "#{item}"
+			end
     end
-		
+
   end
 end
