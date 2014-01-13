@@ -8,6 +8,8 @@ class JavaCrawler
 	def crawl
 		self.chdir
 
+		puts "Folder to crawl through: #{@path}"
+
 		Dir.glob("**/*.java") do |absolute_file_path|
 			puts @path
 			puts File.basename(absolute_file_path)

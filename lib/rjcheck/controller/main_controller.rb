@@ -2,18 +2,14 @@ class MainController
 	attr_accessor :folder
 	attr_accessor :crawler
 	attr_accessor :mapper
-  def initialize(folder)
-		@folder = folder
-		@crawler = JavaCrawler.new(@folder)
+	attr_accessor :dsl
+  def initialize(controller)
+		@dsl = controller
+		@crawler = JavaCrawler.new(@dsl.p_folder.path)
 		@mapper = JavaMapper.new()
   end
 
 	def run
-
-		#puts "\n\n\n *** Crawl everything ***"
-		#crawler = Crawler.new(folder)
-		#crawler.crawl {|file| puts "InData: #{file}"}
-
 		file_list = crawl
 		file_list.each { |key,value|  puts "\n\nLOG: key: #{key}\nvalue: #{value}"}
 		map(file_list)

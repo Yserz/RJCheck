@@ -9,20 +9,14 @@ require 'imports'
 class Main
 	include Imports
 
-	def initialize
-				puts 'Please enter the folder of the project: '
-				folder = gets.chomp
-				#folder = "D:\Eigene Dateien\Eigene Dokumente\NetBeansProjects\RubyTest"
-		
-				DSLController.new()
-				controller = MainController.new(folder)
-		
-				controller.run
 
+	def initialize()
+		puts "MAIN"
 	end
+
 
 end
 
-Main.new()
+#Main.new()
 
 
