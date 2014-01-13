@@ -1,6 +1,9 @@
 
 require_relative('java_with_generic')
 class JavaClass < JavaWithGeneric
+	
+	alias :super_output :output
+	
   # boolean
 	attr_accessor :abstract
   # boolean
@@ -17,4 +20,20 @@ class JavaClass < JavaWithGeneric
     @implements = implements
     @extends = extends
   end
+	
+	
+	def output
+		
+    puts "Extends: #{@extends}"
+    puts "Final: #{@final}"
+		puts "Abstract: #{@abstract}"
+		
+    @implements.each do |item|
+      puts "#{item.identifier}"
+    end
+		
+		super_output()
+	
+	end
+	
 end
