@@ -2,7 +2,7 @@ require 'imports'
 
 class JavaMapper
 	# matches \*package\*
-	Package_signature = "package\s([a-zA-Z.]+);"
+	Package_signature = "package\s([a-zA-Z0-9.]+);"
 	# matches import
 	Import_signature = "import\s([a-zA-Z.]+);"
 	# matches <Object>
