@@ -3,6 +3,7 @@ class MainController
 	attr_accessor :folder
 	attr_accessor :crawler
 	attr_accessor :mapper
+	attr_accessor :analyzer
 	attr_accessor :dsl_object
 	attr_accessor :java_map
 
@@ -12,12 +13,14 @@ class MainController
 		@dsl_controller = controller
 		@crawler = JavaCrawler.new(@dsl_object.project_path)
 		@mapper = JavaMapper.new()
+		@analyzer = Analyzer.new(java_map,)
   end
 
 	def run
 		file_list = crawl
 		file_list.each { |key,value|  puts "\n\nLOG: key: #{key}\nvalue: #{value}"}
 		map(file_list)
+		@analyzer.analyse(java_map, @dsl_object)
 	end
 
 	def crawl
