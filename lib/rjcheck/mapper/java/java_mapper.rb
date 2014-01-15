@@ -31,7 +31,8 @@ class JavaMapper
 	# TODO final static could be reversed, should also process Annotations
 	Class_signature = "((#{Visibility_signature})#{Final_signature}#{Static_signature}#{Abstract_signature}#{Classname_signature}#{ExtendsOrImplements_signature})#{Classbody_signature}"
 
-  @java_map
+
+	attr_accessor :java_map
 
 	def initialize
     @java_map = Hash.new()
