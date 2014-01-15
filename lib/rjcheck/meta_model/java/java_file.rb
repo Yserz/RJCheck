@@ -4,7 +4,7 @@ class JavaFile
   attr_accessor :visibility
   # String
   attr_accessor :package
-  # List<String>
+  # List<java_file>
   attr_accessor :imports
   # String
   attr_accessor :identifier

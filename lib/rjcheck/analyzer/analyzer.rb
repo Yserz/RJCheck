@@ -22,10 +22,12 @@ class Analyzer
 		
 		# alle java klassen durch laufen
 		# key = package + name, value = java_file
-		file_list.each { |key,value|  analyse_file(key,value)}
+		java_map.each { |key,value|  analyse_file(key,value)}
   end	
 	
 	def analyse_file(this_full_qualifier, java_file)
+		
+		puts "analyse file: " + this_full_qualifier
 
 		this_is_entity = false
 		this_is_repository = false
@@ -45,22 +47,28 @@ class Analyzer
 		end
 	
 		#analyse import files package
-		java_file.imports.each { |import_file|  
-			if this_is_entity
-				#entity is not allowed to use manager and repository
-				if java_file.package.include? repositories_package
-					puts "Fail: "+ this_full_qualifier + " uses: "+ import_file.package
-				elsif java_file.package.include? manager_package
-					puts "Fail: "+ this_full_qualifier + " uses: "+ import_file.package
+		if java_file.imports != nil
+			java_file.imports.each { |import_file|  
+				if this_is_entity
+					#entity is not allowed to use manager and repository
+					if java_file.package.include? repositories_package
+						fail_message(this_full_qualifier, import_file)
+					elsif java_file.package.include? manager_package
+						fail_message(this_full_qualifier, import_file)
+					end
+				elsif this_is_repository
+					#repository is not allowed to use manager
+					if java_file.package.include? manager_package
+						fail_message(this_full_qualifier, import_file)
+					end
 				end
-			elsif this_is_repository
-				#repository is not allowed to use manager
-				if java_file.package.include? manager_package
-					puts "Fail: "+ this_full_qualifier + " uses: "+ import_file.package
-				end
-			end
-			#manager is allowed to use everything
-		}
+				#manager is allowed to use everything
+			}
+		end
+	end
+	
+	def fail_message(this_full_qualifier, import_file)
+		puts "Layer Use Fail: "+ this_full_qualifier + " uses: "+ import_file.package + import_file.identifier
 	end
 	
 end

@@ -20,7 +20,7 @@ class MainController
 		file_list = crawl
 		file_list.each { |key,value|  puts "\n\nLOG: key: #{key}\nvalue: #{value}"}
 		map(file_list)
-		#@analyzer.analyse(java_map, @dsl_object)
+		@analyzer.analyse(java_map, @dsl_object)
 	end
 
 	def crawl
