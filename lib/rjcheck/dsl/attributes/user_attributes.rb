@@ -21,8 +21,13 @@ NODE['main_test_folder']['test_folder'] = Hash.new
 NODE['main_test_folder']['test_folder']['path']                  = NODE['main_test_folder']['path'].to_s + 'java/'
 NODE['main_test_folder']['test_folder']['type']                  = 'java'
 NODE['main_test_folder']['test_resources_folder'] = Hash.new
-NODE['main_test_folder']['test_resources_folder']['path']        = NODE['main_test_folder']['path'].to_s + 'resources/'
+NODE['main_test_folder']['test_resources_folder']['path']					= NODE['main_test_folder']['path'].to_s + 'resources/'
 
+NODE['entities_package']																					= ""
+NODE['repositories_package']																			= ""
+NODE['manager_package']																						= ""
+
+NODE['generate_test_classes']																			= true
 
 #node = {}
 #node['project1'] = Hash.new
