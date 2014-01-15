@@ -34,8 +34,6 @@ class MainController
     @mapper.map(file_list)
     @java_map = @mapper.java_map
 
-    # TODO delete line when attribute is set in user_attributes
-    @dsl_object.generate_test_classes = true
     if @dsl_object.generate_test_classes
       generator = TestGenerator.new(@java_map, @dsl_object)
       generator.generate

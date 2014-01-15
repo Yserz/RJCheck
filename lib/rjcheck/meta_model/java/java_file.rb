@@ -21,19 +21,30 @@ class JavaFile
 
   def output
 		puts "\n######################################################"
-    puts "Package: #{@package}"
-    puts "Visibility: #{@visibility}"
-		puts "Name: #{@identifier}"
-
-		puts "Imports: \n"
-    @imports.each do |item|
-      puts "#{item}"
+    
+    if @package != nil
+      puts "Package: #{@package}"
+    end
+    
+    if @visibility != nil
+      puts "Visibility: #{@visibility}"
+    end
+    if @identifier != nil
+      puts "Name: #{@identifier}"
+    end
+	
+    if @imports != nil
+      print "Imports: "
+      @imports.each do |item|
+        print "#{item.identifier}"
+      end
+			puts ""
     end
 
-		puts "Annotations: \n"
 		if @annotations != nil
+      puts "Annotations: \n"
 			@annotations.each do |item|
-				puts "#{item}"
+				puts "#{item.identifier}"
 			end
     end
 

@@ -1,8 +1,6 @@
 require_relative('java_with_generic')
 class JavaInterface < JavaWithGeneric
 
-	alias :super_output :output
-
   # List<JavaInterface>
   attr_accessor :extends
 
@@ -13,9 +11,12 @@ class JavaInterface < JavaWithGeneric
 
 	def output
 
-		super_output()
-		#nullpointer here
-		#		puts "Extends: #{@extends.identifier}"
+		super
+		if @extends != nil
+				@extends.each do |item|
+				puts "Extends: #{@extends.identifier}"
+			end
+		end
 	end
 
 end
