@@ -16,19 +16,23 @@ class DSLController
     end
   end
 
-	setter :main_source_folder, :main_test_folder
+	setter :project_path
+	setter :main_source_folder_path, :source_folder_path, :source_folder_type, :source_resources_folder_path
+	setter :main_test_folder_path, :test_folder_path, :test_folder_type, :test_resources_folder_path
+	setter :entities_package, :repositories_package, :manager_package
+	setter :generate_test_classes
 
 	def initialize
-		main_source_folder DEFAULT['main_source_folder']['source_folder']['path']
-		main_test_folder DEFAULT['main_test_folder']['test_folder']['path']
+		main_source_folder_path DEFAULT['main_source_folder']['source_folder']['path']
+		main_test_folder_path DEFAULT['main_test_folder']['test_folder']['path']
 	end
 
-	def project_folder(path, &block)
+	def read_dsl(path, &block)
 		@dsl_object = DSLObject.new(path)
 		instance_eval(&block)
 
-		puts "  -- main_source_folder: #{@main_source_folder}"
-		puts "  -- main_test_folder #{@main_test_folder}"
+		puts "  -- main_source_folder: #{@main_source_folder_path}"
+		puts "  -- main_test_folder #{@main_test_folder_path}"
 
 		#		puts self.methods.inspect
 

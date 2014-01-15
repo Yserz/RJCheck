@@ -2,9 +2,9 @@ require 'rjcheck/dsl/attributes/user_attributes.rb'
 
 RJ = DSLController.new()
 
-RJ.project_folder NODE['path'] do
-	main_source_folder			NODE['main_source_folder']['source_folder']['path']
-	main_test_folder				NODE['main_test_folder']['test_folder']['path']
+RJ.read_dsl NODE['path'] do
+	main_source_folder_path			NODE['main_source_folder']['source_folder']['path']
+	main_test_folder_path				NODE['main_test_folder']['test_folder']['path']
 end
 
 ## Sources
