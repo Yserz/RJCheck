@@ -13,7 +13,7 @@ class MainController
 		@dsl_controller = controller
 		@crawler = JavaCrawler.new(@dsl_object.project_path)
 		@mapper = JavaMapper.new()
-		@analyzer = Analyzer.new(java_map,)
+		@analyzer = Analyzer.new()
   end
 
 	def run
