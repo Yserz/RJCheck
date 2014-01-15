@@ -1,5 +1,6 @@
 
 require_relative('java_with_generic')
+require 'erb'
 class JavaClass < JavaWithGeneric
 
   # boolean
@@ -40,6 +41,10 @@ class JavaClass < JavaWithGeneric
 				puts "#{item.identifier}"
 			end
 		end
+	end
+
+	def template_binding
+		binding
 	end
 
 end
