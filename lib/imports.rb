@@ -10,7 +10,7 @@ require 'rjcheck/crawler/crawler'
 require 'rjcheck/crawler/java/java_crawler'
 require 'rjcheck/mapper/java/java_mapper'
 require 'rjcheck/mapper/java/mapper_test'
-require 'rjcheck/controller/main_controller'
+
 
 require 'rjcheck/dsl/controller/dsl_controller'
 #require 'rjcheck/dsl/model/project_folder'

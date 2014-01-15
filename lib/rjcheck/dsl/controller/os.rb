@@ -14,5 +14,14 @@ module OS
 
   def OS.linux?
     OS.unix? and not OS.mac?
-  end
+	end
+
+	def OS.replace_separator(text)
+		if OS.windows?
+			text.gsub("/", "\\")
+		elsif OS.mac? | OS.unix? | OS.linux?
+			#			text.gsub("/", "/")
+			text
+		end
+	end
 end
