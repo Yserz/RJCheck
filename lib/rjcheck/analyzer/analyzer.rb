@@ -25,26 +25,42 @@ class Analyzer
 		file_list.each { |key,value|  analyse_file(key,value)}
   end	
 	
-	def analyse_file(key,value)
+	def analyse_file(this_full_qualifier, java_file)
 
-		is_entity = false
-		is_repository = false
-		is_manager = false
+		this_is_entity = false
+		this_is_repository = false
+		this_is_manager = false
 		
 		entities_package = @dsl_object.entities_package
 		repositories_package = @dsl_object.repositories_package
 		manager_package = @dsl_object.manager_package
 	
-		if key.include? entities_package
-
-		elsif key.include? repositories_package
-   
-		elsif key.include? manager_package
-   
-		else
-			
+		#analyse this file package
+		if this_full_qualifier.include? entities_package
+			this_is_entity = true
+		elsif this_full_qualifier.include? repositories_package
+			this_is_repository = true
+		elsif this_full_qualifier.include? manager_package
+			this_is_manager = true
 		end
 	
+		#analyse import files package
+		java_file.imports.each { |import_file|  
+			if this_is_entity
+				#entity is not allowed to use manager and repository
+				if java_file.package.include? repositories_package
+					puts "Fail: "+ this_full_qualifier + " uses: "+ import_file.package
+				elsif java_file.package.include? manager_package
+					puts "Fail: "+ this_full_qualifier + " uses: "+ import_file.package
+				end
+			elsif this_is_repository
+				#repository is not allowed to use manager
+				if java_file.package.include? manager_package
+					puts "Fail: "+ this_full_qualifier + " uses: "+ import_file.package
+				end
+			end
+			#manager is allowed to use everything
+		}
 	end
 	
 end
