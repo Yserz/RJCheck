@@ -26,4 +26,10 @@ class DSLObject
     @project_path = path
   end
 
+	def to_s
+		self.instance_variables.map do |var|
+			puts [var, self.instance_variable_get(var)].join(":")
+		end
+	end
+
 end

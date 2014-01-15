@@ -44,21 +44,21 @@ class DSLController
 		@dsl_object = DSLObject.new(path)
 		instance_eval(&block)
 
-		@dsl_object.main_source_folder_path = @main_source_folder_path
-		@dsl_object.source_folder_path = @source_folder_path
-		@dsl_object.source_folder_type = @source_folder_type
-		@dsl_object.source_resources_folder_path = @source_resources_folder_path
+		@dsl_object.main_source_folder_path						= @main_source_folder_path
+		@dsl_object.source_folder_path								= @source_folder_path
+		@dsl_object.source_folder_type								= @source_folder_type
+		@dsl_object.source_resources_folder_path			= @source_resources_folder_path
 
-		@dsl_object.main_test_folder_path = @main_test_folder_path
-		@dsl_object.test_folder_path = @test_folder_path
-		@dsl_object.test_folder_type = @test_folder_type
-		@dsl_object.test_resources_folder_path = @test_resources_folder_path
+		@dsl_object.main_test_folder_path							= @main_test_folder_path
+		@dsl_object.test_folder_path									= @test_folder_path
+		@dsl_object.test_folder_type									= @test_folder_type
+		@dsl_object.test_resources_folder_path				= @test_resources_folder_path
 
-		@dsl_object.entities_package = @entities_package
-		@dsl_object.repositories_package = @repositories_package
-		@dsl_object.manager_package = @manager_package
+		@dsl_object.entities_package									= @entities_package
+		@dsl_object.repositories_package							= @repositories_package
+		@dsl_object.manager_package										= @manager_package
 
-		@dsl_object.generate_test_classes = @generate_test_classes
+		@dsl_object.generate_test_classes							= @generate_test_classes
 
 		puts "#{@dsl_object.to_s}"
 
