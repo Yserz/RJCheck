@@ -40,7 +40,7 @@ class DSLController
 		generate_test_classes					DEFAULT['generate_test_classes']
 	end
 
-	def read_dsl(path, &block)
+	def define_project(path, &block)
 		@dsl_object = DSLObject.new(path)
 		instance_eval(&block)
 
