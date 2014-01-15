@@ -1,11 +1,11 @@
 require 'rjcheck/dsl/attributes/default_attributes.rb'
-require 'rjcheck/dsl/model/project_folder'
+require 'rjcheck/dsl/model/dsl_object'
 
 #puts DEFAULT.inspect
 
 class DSLController
 
-	attr_accessor :p_folder
+	attr_accessor :dsl_object
 
 	def self.setter(*method_names)
     method_names.each do |name|
@@ -24,7 +24,7 @@ class DSLController
 	end
 
 	def project_folder(path, &block)
-		@p_folder = ProjectFolder.new(path)
+		@dsl_object = DSLObject.new(path)
 		instance_eval(&block)
 
 		puts "  -- main_source_folder: #{@main_source_folder}"

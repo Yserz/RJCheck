@@ -2,13 +2,14 @@ class MainController
 	attr_accessor :folder
 	attr_accessor :crawler
 	attr_accessor :mapper
-	attr_accessor :dsl
+	attr_accessor :dsl_object
 	attr_accessor :java_map
 
   def initialize(controller)
 		@java_map = Hash.new()
-		@dsl = controller
-		@crawler = JavaCrawler.new(@dsl.p_folder.path)
+		@dsl_object = controller.dsl_object
+		@dsl_controller = controller
+		@crawler = JavaCrawler.new(@dsl_object.project_path)
 		@mapper = JavaMapper.new()
   end
 
