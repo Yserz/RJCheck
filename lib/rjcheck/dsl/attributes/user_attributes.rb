@@ -2,7 +2,9 @@ node = {}
 node['project1'] = Hash.new
 node['project1']['project_folder'] = Hash.new
 
-node['project1']['project_folder']['path'] = "/Users/MacYser/Documents/Workspaces/NetBeansWorkspace/JavaTestApp/"
+#node['project1']['project_folder']['path'] = "/Users/MacYser/Documents/Workspaces/NetBeansWorkspace/JavaTestApp/"
+
+node['project1']['project_folder']['path'] = '/Users/kaain/IntelliJProjects/TwiTemplating'
 
 NODE = node['project1']['project_folder']
 

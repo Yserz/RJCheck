@@ -1,3 +1,4 @@
+require 'rjcheck/generator/java/test_generator'
 class MainController
 	attr_accessor :folder
 	attr_accessor :crawler
@@ -26,10 +27,17 @@ class MainController
 		file_list
 	end
 
-	def map(file_list)
-		@mapper.map(file_list)
-		@java_map = @mapper.java_map
-	end
+  def map(file_list)
+    @mapper.map(file_list)
+    @java_map = @mapper.java_map
+
+    # TODO delete line when attribute is set in user_attributes
+    @dsl_object.generate_test_classes = true
+    if @dsl_object.generate_test_classes
+      generator = TestGenerator.new(@java_map, @dsl_object)
+      generator.generate
+    end
+  end
 
 	# Analyze Code with @java_map and @dsl
 end
