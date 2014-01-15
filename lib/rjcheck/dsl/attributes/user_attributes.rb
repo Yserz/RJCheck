@@ -5,6 +5,8 @@ node['project1']['project_folder'] = Hash.new
 #node['project1']['project_folder']['path']												= "/Users/MacYser/Documents/Workspaces/NetBeansWorkspace/JavaTestApp/"
 node['project1']['project_folder']['path']												= '/Users/kaain/IntelliJProjects/TwiTemplating'
 
+node['project1']['project_folder']['path'] = 'D:/Eigene Dateien/Eigene Dokumente/NetBeansProjects/RubyTest'
+
 NODE = node['project1']['project_folder']
 
 #NODE['path'] = node['project1']['project_folder']['path']
@@ -28,4 +30,4 @@ NODE['entities_package']																					= ""
 NODE['repositories_package']																			= ""
 NODE['manager_package']																						= ""
 
-NODE['generate_test_classes']																			= true
+NODE['generate_test_classes']																			= false

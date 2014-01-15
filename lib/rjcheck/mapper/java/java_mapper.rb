@@ -86,22 +86,16 @@ class JavaMapper
       end
     end
 
-		#initialze missing fields
-		annotations = Array.new
-		implements = Array.new
-		extends=""
-		generics=""
-		imports=Array.new;
 
 		# create objects into java_map for class or interface
 		if type=="class"
-			java_class = JavaClass.new(package, visibility, imports, name, annotations, abstract, final, implements, extends, generics)
+			java_class = JavaClass.new(package, visibility, nil, name, nil, abstract, final, nil, nil, nil)
 			qual_name = package+"."+name
 			@java_map[qual_name] = java_class
 		end
 
 		if type=="interface"
-			java_inter = JavaInterface.new(package, visibility, Array.new, name, nil, nil, nil)
+			java_inter = JavaInterface.new(package, visibility, nil, name, nil, nil, nil)
 			qual_name = package+"."+name
 			@java_map[qual_name] = java_inter
 		end
@@ -113,9 +107,9 @@ class JavaMapper
 
 		annotations = Array.new
 		implements = Array.new
-		import=Array.new;
+		import=Array.new
 		extends = nil
-		generics = ""
+		generics = nil
 
 		#TODO annotations
 		#TODO generics
@@ -185,25 +179,39 @@ class JavaMapper
 			object = @java_map[package+"."+name]
 			# save searched iformations into current class object
 			if object != nil
-				#import.each do |item|
-				#	object.imports.push(item)
-				#end
+				if object.imports == nil
+					if import.size > 0
+						object.imports = Array.new
+					end
+				end
+				
 				import.each do |i|
           help = @java_map[i]
           if help != nil
             object.imports.push(help)
           end
         end
+				
+				if object.imports != nil
+					if object.imports.size == 0
+						object.imports = nil
+					end
+				end
 
-				#implements.each do |item|
-				#	object.implements.push(item)
-				#end
-				import.each do |i|
-          help = @java_map[i]
-          if help != nil
-            object.implements.push(help)
-          end
-        end
+				if object.respond_to?("implements")
+					if object.implements == nil
+						if implements.size > 0
+							object.implements = Array.new
+						end
+					end
+					implements.each do |i|
+						help = @java_map[i]
+						if help != nil
+							object.implements.push(help)
+						end
+					end
+				end
+			
 
 				# prints out the mapped paramter
 				object.output;

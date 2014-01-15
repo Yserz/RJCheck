@@ -2,8 +2,6 @@
 require_relative('java_with_generic')
 class JavaClass < JavaWithGeneric
 
-	alias :super_output :output
-
   # boolean
 	attr_accessor :abstract
   # boolean
@@ -23,14 +21,25 @@ class JavaClass < JavaWithGeneric
 
 
 	def output
-		super_output()
-		puts "Extends: #{@extends}"
-    puts "Final: #{@final}"
-		puts "Abstract: #{@abstract}"
-
-    @implements.each do |item|
-      puts "#{item.identifier}"
+		super
+		
+    if @extends != nil
+      puts "Extends: #{@extends}"
     end
+		
+    if @final != nil
+      puts "Final: #{@final}"
+    end
+    
+    if @abstract != nil
+			puts "Abstract: #{@abstract}"
+		end
+
+		if @implements != nil
+			@implements.each do |item|
+				puts "#{item.identifier}"
+			end
+		end
 	end
 
 end
