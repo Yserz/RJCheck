@@ -1,12 +1,15 @@
 require 'rjcheck/dsl/attributes/default_attributes.rb'
 require 'rjcheck/dsl/model/dsl_object'
+require 'rjcheck/dsl/controller/os'
 
 #puts DEFAULT.inspect
 
 class DSLController
+	include OS
 
 	attr_accessor :dsl_object
 
+	# generate setter methods to access attributes without @ (neccessary for the recipe)
 	def self.setter(*method_names)
     method_names.each do |name|
 			attr_reader name
@@ -41,22 +44,22 @@ class DSLController
 	end
 
 	def define_project(path, &block)
-		@dsl_object = DSLObject.new(path)
+		@dsl_object = DSLObject.new(replace_separator path)
 		instance_eval(&block)
 
-		@dsl_object.main_source_folder_path						= @main_source_folder_path
-		@dsl_object.source_folder_path								= @source_folder_path
-		@dsl_object.source_folder_type								= @source_folder_type
-		@dsl_object.source_resources_folder_path			= @source_resources_folder_path
+		@dsl_object.main_source_folder_path						= replace_separator @main_source_folder_path
+		@dsl_object.source_folder_path								= replace_separator @source_folder_path
+		@dsl_object.source_folder_type								= replace_separator @source_folder_type
+		@dsl_object.source_resources_folder_path			= replace_separator @source_resources_folder_path
 
-		@dsl_object.main_test_folder_path							= @main_test_folder_path
-		@dsl_object.test_folder_path									= @test_folder_path
-		@dsl_object.test_folder_type									= @test_folder_type
-		@dsl_object.test_resources_folder_path				= @test_resources_folder_path
+		@dsl_object.main_test_folder_path							= replace_separator @main_test_folder_path
+		@dsl_object.test_folder_path									= replace_separator @test_folder_path
+		@dsl_object.test_folder_type									= replace_separator @test_folder_type
+		@dsl_object.test_resources_folder_path				= replace_separator @test_resources_folder_path
 
-		@dsl_object.entities_package									= @entities_package
-		@dsl_object.repositories_package							= @repositories_package
-		@dsl_object.manager_package										= @manager_package
+		@dsl_object.entities_package									= replace_separator @entities_package
+		@dsl_object.repositories_package							= replace_separator @repositories_package
+		@dsl_object.manager_package										= replace_separator @manager_package
 
 		@dsl_object.generate_test_classes							= @generate_test_classes
 
@@ -68,8 +71,15 @@ class DSLController
 		controller.run
 	end
 
+	def replace_separator(text)
+		if OS.windows?
+			text.gsub("/", "\\")
+		elsif OS.mac? | OS.unix? | OS.linux?
+			#			text.gsub("/", "/")
+			text
+		end
+	end
 end
-
 
 require 'rjcheck/dsl/controller/recipe.rb'
 
