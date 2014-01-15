@@ -1,4 +1,5 @@
 require 'rjcheck/generator/java/test_generator'
+require 'rjcheck/analyzer/analyzer'
 class MainController
 	attr_accessor :folder
 	attr_accessor :crawler
