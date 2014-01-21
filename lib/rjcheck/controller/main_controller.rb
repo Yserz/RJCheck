@@ -21,6 +21,12 @@ class MainController
 		file_list = crawl
 		file_list.each { |key,value|  puts "\n\nLOG: key: #{key}\nvalue: #{value}"}
 		map(file_list)
+
+		if @dsl_object.generate_test_classes
+			generator = TestGenerator.new(@java_map, @dsl_object)
+			generator.generate
+		end
+
 		@analyzer.analyse(java_map, @dsl_object)
 	end
 
@@ -34,11 +40,6 @@ class MainController
   def map(file_list)
     @mapper.map(file_list)
     @java_map = @mapper.java_map
-
-    if @dsl_object.generate_test_classes
-      generator = TestGenerator.new(@java_map, @dsl_object)
-      generator.generate
-    end
   end
 
 	# Analyze Code with @java_map and @dsl
