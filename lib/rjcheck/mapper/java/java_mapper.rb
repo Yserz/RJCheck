@@ -2,34 +2,34 @@ require 'imports'
 
 class JavaMapper
 	# matches \*package\*
-	Package_signature = "package\s([a-zA-Z0-9.]+);"
+	PACKAGE_SIGNATURE = "package\s([a-zA-Z0-9.]+);"
 	# matches import
-	Import_signature = "import\s([a-zA-Z.]+);"
+	IMPORT_SIGNATURE = "import\s([a-zA-Z.]+);"
 	# matches <Object>
-	Generic_signature = "(?:<[A-Z]{1}[a-zA-Z0-9]*>)?"
+	GENERIC_SIGNATURE = "(?:<[A-Z]{1}[a-zA-Z0-9]*>)?"
 	# matches _static
-	Static_signature = "(?:\sstatic)?"
+	STATIC_SIGNATURE = "(?:\sstatic)?"
 	# matches _final
-	Final_signature = "(?:\sfinal)?"
+	FINAL_SIGNATURE = "(?:\sfinal)?"
 	# matches _abstract
-	Abstract_signature = "(?:\sabstract)?"
+	ABSTRACT_SIGNATURE = "(?:\sabstract)?"
 	# matches public protected or private
-	Visibility_signature = "(?:public|protected|private)?"
+	VISIBILITY_SIGNATURE = "(?:public|protected|private)?"
   # match with types of java-files
-  Type_signature = "(class|interface|enum)"
+  TYPE_SIGNATURE = "(class|interface|enum)"
 	# matches _class_ArrayList<Object>
-	Classname_signature = "[\s]?#{Type_signature}\s([A-Z]{1}[a-zA-Z0-9]*#{Generic_signature})"
+	CLASSNAME_SIGNATURE = "[\s]?#{TYPE_SIGNATURE}\s([A-Z]{1}[a-zA-Z0-9]*#{GENERIC_SIGNATURE})"
 	# matches _extends_ArrayList<Object>
-	Extends_signature = "\sextends\s([A-Z]{1}[a-zA-Z0-9]*#{Generic_signature})"
+	EXTENDS_SIGNATURE = "\sextends\s([A-Z]{1}[a-zA-Z0-9]*#{GENERIC_SIGNATURE})"
 	# matches _implements_List<Object>,_List<Object>
-	Implements_signature = "\simplements\s([A-Z]{1}[a-zA-Z0-9]*#{Generic_signature}[,\s?[A-Z]{1}[a-zA-Z0-9]*#{Generic_signature}]*)"
+	IMPLEMENTS_SIGNATURE = "\simplements\s([A-Z]{1}[a-zA-Z0-9]*#{GENERIC_SIGNATURE}[,\s?[A-Z]{1}[a-zA-Z0-9]*#{GENERIC_SIGNATURE}]*)"
 	# matches _extends_Object<>_implements_List<> or implements_List<>_extends_Object<>
-	ExtendsOrImplements_signature = "(?:(?:#{Extends_signature})?(?:#{Implements_signature})?)?(?:(?:#{Extends_signature})?(?:#{Implements_signature})?)?"
+	EXTENDS_OR_IMPLEMENTS_SIGNATURE = "(?:(?:#{EXTENDS_SIGNATURE})?(?:#{IMPLEMENTS_SIGNATURE})?)?(?:(?:#{EXTENDS_SIGNATURE})?(?:#{IMPLEMENTS_SIGNATURE})?)?"
 	# matches \*{\*}
-	Classbody_signature = ".*?(\{.*\})"
+	CLASSBODY_SIGNATURE = ".*?(\{.*\})"
 	# matches package\* public final static class Something extends Object<> implements List<> {...}
 	# TODO final static could be reversed, should also process Annotations
-	Class_signature = "((#{Visibility_signature})#{Final_signature}#{Static_signature}#{Abstract_signature}#{Classname_signature}#{ExtendsOrImplements_signature})#{Classbody_signature}"
+	CLASS_SIGNATURE = "((#{VISIBILITY_SIGNATURE})#{FINAL_SIGNATURE}#{STATIC_SIGNATURE}#{ABSTRACT_SIGNATURE}#{CLASSNAME_SIGNATURE}#{EXTENDS_OR_IMPLEMENTS_SIGNATURE})#{CLASSBODY_SIGNATURE}"
 
 
 	attr_accessor :java_map
@@ -48,8 +48,8 @@ class JavaMapper
   def pre_mapping(text)
     # read out package, name, typ
 
-    package = ""
-    class_regex = Regexp.new(Package_signature,Regexp::MULTILINE )
+    package = ''
+    class_regex = Regexp.new(PACKAGE_SIGNATURE,Regexp::MULTILINE )
     if text.match(class_regex)
       match = class_regex.match(text)
       if match
@@ -57,13 +57,13 @@ class JavaMapper
       end
     end
 
-    class_regex = Regexp.new(Class_signature,Regexp::MULTILINE )
+    class_regex = Regexp.new(CLASS_SIGNATURE,Regexp::MULTILINE )
 
-    type=""
-		name = ""
+    type=''
+		name = ''
     abstract = false
     final = false
-    visibility = ""
+    visibility = ''
     if text.match(class_regex)
       match = class_regex.match(text)
       if match
@@ -88,15 +88,15 @@ class JavaMapper
 
 
 		# create objects into java_map for class or interface
-		if type=="class"
+		if type=='class'
 			java_class = JavaClass.new(package, visibility, nil, name, nil, abstract, final, nil, nil, nil)
-			qual_name = package+"."+name
+			qual_name = package+'.'+name
 			@java_map[qual_name] = java_class
 		end
 
-		if type=="interface"
+		if type=='interface'
 			java_inter = JavaInterface.new(package, visibility, nil, name, nil, nil, nil)
-			qual_name = package+"."+name
+			qual_name = package+'.'+name
 			@java_map[qual_name] = java_inter
 		end
 
@@ -116,7 +116,7 @@ class JavaMapper
 		#TODO extends
 
 		#search for extends
-		class_regex = Regexp.new(Extends_signature,Regexp::MULTILINE)
+		class_regex = Regexp.new(EXTENDS_SIGNATURE,Regexp::MULTILINE)
 		if text.match(class_regex)
 			match = class_regex.match(text)
 			if match
@@ -127,7 +127,7 @@ class JavaMapper
 		end
 
 		#search for implements
-		class_regex = Regexp.new(Implements_signature,Regexp::MULTILINE)
+		class_regex = Regexp.new(IMPLEMENTS_SIGNATURE,Regexp::MULTILINE)
 		if text.match(class_regex)
 			match = text.scan(class_regex)
 			if match
@@ -141,7 +141,7 @@ class JavaMapper
 		end
 
 		#search for imports
-		class_regex = Regexp.new(Import_signature,Regexp::MULTILINE)
+		class_regex = Regexp.new(IMPORT_SIGNATURE,Regexp::MULTILINE)
 		if text.match(class_regex)
 			match = text.scan(class_regex)
 			if match
@@ -154,8 +154,8 @@ class JavaMapper
 		end
 
 		#search for package
-		package = ""
-		class_regex = Regexp.new(Package_signature,Regexp::MULTILINE )
+		package = ''
+		class_regex = Regexp.new(PACKAGE_SIGNATURE,Regexp::MULTILINE )
 		if text.match(class_regex)
 			match = class_regex.match(text)
 			if match
@@ -166,8 +166,8 @@ class JavaMapper
 
 
 		#search for class
-		class_regex = Regexp.new(Class_signature,Regexp::MULTILINE )
-		name = ""
+		class_regex = Regexp.new(CLASS_SIGNATURE,Regexp::MULTILINE )
+		name = ''
 		if text.match(class_regex)
 			match = class_regex.match(text)
 			if match
@@ -176,7 +176,7 @@ class JavaMapper
 			end
 
 			# get the object in array for current class
-			object = @java_map[package+"."+name]
+			object = @java_map[package+'.'+name]
 			# save searched iformations into current class object
 			if object != nil
 				if object.imports == nil
@@ -198,7 +198,7 @@ class JavaMapper
 					end
 				end
 
-				if object.respond_to?("implements")
+				if object.respond_to?('implements')
 					if object.implements == nil
 						if implements.size > 0
 							object.implements = Array.new
@@ -214,7 +214,7 @@ class JavaMapper
 			
 
 				# prints out the mapped paramter
-				object.output;
+				object.output
 			end
 
 
@@ -223,10 +223,10 @@ class JavaMapper
 			#                        groups.each { |i| puts i }
 			#                        puts groups.last
 		elsif text.scan(/.*/)
-			warn "Matches everything"
+			warn 'Matches everything'
 			warn "#{path} ==> \n#{text.match(class_regex)}"
 		else
-			warn "matches nothing"
+			warn 'matches nothing'
 		end
 		object
 	end

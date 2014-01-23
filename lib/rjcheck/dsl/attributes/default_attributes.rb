@@ -25,8 +25,8 @@ DEFAULT['main_test_folder']['test_folder']['type']                  = 'java'
 DEFAULT['main_test_folder']['test_resources_folder'] = Hash.new
 DEFAULT['main_test_folder']['test_resources_folder']['path']        = DEFAULT['main_test_folder']['path'].to_s + 'resources/'
 
-DEFAULT['entities_package']																					= ""
-DEFAULT['repositories_package']																			= ""
-DEFAULT['manager_package']																					= ""
+DEFAULT['entities_package']																					= ''
+DEFAULT['repositories_package']																			= ''
+DEFAULT['manager_package']																					= ''
 
 DEFAULT['generate_test_classes']																		= false

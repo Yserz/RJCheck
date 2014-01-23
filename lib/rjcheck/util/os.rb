@@ -24,4 +24,12 @@ module OS
 			text
 		end
 	end
+
+	def OS.get_system_separator
+		if OS.windows?
+			'\\'
+		elsif OS.mac? | OS.unix? | OS.linux?
+			'/'
+		end
+	end
 end

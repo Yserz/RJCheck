@@ -10,7 +10,7 @@ class JavaCrawler
 
 		puts "Folder to crawl through: #{@path}"
 
-		Dir.glob("**/*.java") do |absolute_file_path|
+		Dir.glob('**/*.java') do |absolute_file_path|
 			puts @path
 			puts File.basename(absolute_file_path)
 			puts absolute_file_path
@@ -24,7 +24,7 @@ class JavaCrawler
 		begin
 			Dir.chdir(@path)
 		rescue
-			warn "could not find the folder!"
+			warn 'could not find the folder!'
 		end
 	end
 end

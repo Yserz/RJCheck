@@ -10,7 +10,7 @@ class Main
 	include Imports
 
 	def initialize
-		puts "MAIN"
+		puts 'MAIN'
 
 	end
 end

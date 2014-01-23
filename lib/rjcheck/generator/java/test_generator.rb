@@ -1,4 +1,3 @@
-
 require 'rjcheck/util/os'
 class TestGenerator
 	attr_accessor :java_map
@@ -32,13 +31,11 @@ class TestGenerator
 
 		path_to_class = class_object.package.gsub('.', '/')
 		path_to_class = OS.replace_separator path_to_class
-		#FAIL
-		puts "#{@dsl_model.main_test_folder_path}#{path_to_class}"
-		#FAIL
+		system_separator = OS.get_system_separator
+
 		path_to_class = "#{@dsl_model.test_folder_path}#{path_to_class}"
 		FileUtils.mkdir_p path_to_class
-		path_to_class = "#{path_to_class}/#{class_object.identifier}Test.java"
-		path_to_class = OS.replace_separator path_to_class
+		path_to_class = "#{path_to_class}#{system_separator}#{class_object.identifier}Test.java"
 		puts "write to: #{path_to_class}"
 
 		template = File.read(File.join(File.dirname(__FILE__), '../../resources/test_class_template.erb'))
