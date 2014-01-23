@@ -6,7 +6,7 @@ class JavaCrawler
   end
 
 	def crawl
-		self.chdir
+		chdir
 
 		puts "Folder to crawl through: #{@path}"
 
@@ -19,7 +19,7 @@ class JavaCrawler
 			yield absolute_file_path, data
 		end
 	end
-
+	private
 	def chdir
 		begin
 			Dir.chdir(@path)

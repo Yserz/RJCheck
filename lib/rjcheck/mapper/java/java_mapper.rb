@@ -43,7 +43,7 @@ class JavaMapper
     file_list.each { |key,value|  pre_mapping(value)}
 		file_list.each { |key,value|  map_file(key,value)}
 	end
-
+	private
 	# creates entries in @java_map for mapping method
   def pre_mapping(text)
     # read out package, name, typ
@@ -184,14 +184,14 @@ class JavaMapper
 						object.imports = Array.new
 					end
 				end
-				
+
 				import.each do |i|
           help = @java_map[i]
           if help != nil
             object.imports.push(help)
           end
         end
-				
+
 				if object.imports != nil
 					if object.imports.size == 0
 						object.imports = nil
@@ -211,7 +211,7 @@ class JavaMapper
 						end
 					end
 				end
-			
+
 
 				# prints out the mapped paramter
 				object.output

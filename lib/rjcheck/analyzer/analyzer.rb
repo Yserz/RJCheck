@@ -14,7 +14,7 @@ class Analyzer
 		# key = package + name, value = java_file
 		@java_map.each { |key,value|  analyse_file(key,value)}
   end
-
+	private
 	def analyse_file(this_full_qualifier, java_file)
 
 		puts 'analyse file: ' + this_full_qualifier
@@ -57,7 +57,7 @@ class Analyzer
 		end
 	end
 
-	private
+
 	def fail_message(this_full_qualifier, import_file)
 		puts 'Layer use fail: '+ this_full_qualifier + ' uses: '+ import_file.package + import_file.identifier
 	end
