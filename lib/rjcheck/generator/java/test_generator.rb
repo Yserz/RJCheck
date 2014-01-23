@@ -11,7 +11,7 @@ class TestGenerator
 	def generate
 		puts '####### Generation of TestClasses begins'
 		@java_map.each { |key, value|
-			if @java_map.has_key?(key.end_with?('Test'))
+			if @java_map.has_key?(key +'Test') || key.end_with?('Test')
 				puts key + ' already has a Test (Test will not be generated)'
 			elsif value.is_a? JavaClass
 				if value.abstract
