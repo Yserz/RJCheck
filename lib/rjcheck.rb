@@ -10,9 +10,10 @@ class Main
 	include Imports
 
 	def initialize
-		puts 'MAIN'
-
+		controller = MainController.new()
+		controller.run
 	end
+	Main.new()
 end
 
 

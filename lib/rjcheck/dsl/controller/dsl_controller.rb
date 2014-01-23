@@ -42,6 +42,7 @@ class DSLController
 	end
 
 	def define_project(path, &block)
+		puts "executing define_project"
 		@dsl_model = DSLModel.new(OS.replace_separator path)
 		instance_eval(&block)
 
@@ -63,8 +64,6 @@ class DSLController
 
 		puts "#{@dsl_model.to_s}"
 
-		controller = MainController.new(self)
-		controller.run
 	end
 end
 

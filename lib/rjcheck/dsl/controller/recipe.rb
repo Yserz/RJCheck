@@ -1,8 +1,8 @@
 require 'rjcheck/dsl/attributes/user_attributes.rb'
 
-RJ = DSLController.new()
+$RJ = DSLController.new()
 
-RJ.define_project NODE['path'] do
+$RJ.define_project NODE['path'] do
 	main_source_folder_path				NODE['main_source_folder']['path']
 	source_folder_path						NODE['main_source_folder']['source_folder']['path']
 	source_folder_type						NODE['main_source_folder']['source_folder']['type']

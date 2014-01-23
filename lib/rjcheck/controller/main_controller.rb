@@ -1,7 +1,6 @@
 require 'rjcheck/generator/java/test_generator'
 require 'rjcheck/analyzer/analyzer'
 class MainController
-	attr_accessor :dsl_controller
 	attr_accessor :crawler
 	attr_accessor :mapper
 	attr_accessor :dsl_model
@@ -9,13 +8,11 @@ class MainController
 	attr_accessor :analyzer
 	attr_accessor :generator
 
-  def initialize(controller)
+  def initialize()
+		@dsl_model = $RJ.dsl_model
 		@java_map = Hash.new()
-		@dsl_model = controller.dsl_model
-		@dsl_controller = controller
 		@crawler = JavaCrawler.new(@dsl_model.project_path)
 		@mapper = JavaMapper.new()
-
   end
 
 	def run

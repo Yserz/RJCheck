@@ -9,7 +9,6 @@ require 'rjcheck/meta_model/java/method'
 require 'rjcheck/analyzer/analyzer'
 require 'rjcheck/crawler/java/java_crawler'
 require 'rjcheck/mapper/java/java_mapper'
-require 'rjcheck/mapper/java/mapper_test'
 
 
 require 'rjcheck/dsl/controller/dsl_controller'
