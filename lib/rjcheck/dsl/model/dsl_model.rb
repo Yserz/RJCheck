@@ -28,7 +28,7 @@ class DSLObject
 
 	def to_s
 		self.instance_variables.map do |var|
-			puts [var, self.instance_variable_get(var)].join(":")
+			puts [var, self.instance_variable_get(var)].join(':')
 		end
 	end
 

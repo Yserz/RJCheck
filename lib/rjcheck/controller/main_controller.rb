@@ -18,18 +18,18 @@ class MainController
   end
 
 	def run
-		file_list = crawl()
+		file_list = crawl
 		file_list.each { |key,value|  puts "\n\nLOG: key: #{key}\nvalue: #{value}"}
 		@java_map = map(file_list)
 
 		@analyzer = Analyzer.new(@java_map, @dsl_model)
 		@generator = TestGenerator.new(@java_map, @dsl_model)
 
-		analyze()
-		generate_tests()
+		analyze
+		generate_tests
 	end
 
-	def crawl()
+	def crawl
 		puts "\n\n\n *** Crawl Java ***"
 		file_list = Hash.new()
 		@crawler.crawl {|path,file| file_list[path]=file}
@@ -41,11 +41,11 @@ class MainController
     @mapper.java_map
   end
 
-	def analyze()
-		@analyzer.analyse()
+	def analyze
+		@analyzer.analyse
 	end
 
-	def generate_tests()
+	def generate_tests
 		if @dsl_model.generate_test_classes
       @generator.generate
     end
