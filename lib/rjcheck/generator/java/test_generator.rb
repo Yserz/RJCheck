@@ -35,7 +35,7 @@ class TestGenerator
 		#FAIL
 		puts "#{@dsl_model.main_test_folder_path}#{path_to_class}"
 		#FAIL
-		path_to_class = "#{@dsl_model.main_test_folder_path}#{path_to_class}"
+		path_to_class = "#{@dsl_model.test_folder_path}#{path_to_class}"
 		FileUtils.mkdir_p path_to_class
 		path_to_class = "#{path_to_class}/#{class_object.identifier}Test.java"
 		path_to_class = OS.replace_separator path_to_class
