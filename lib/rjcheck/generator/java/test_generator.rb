@@ -16,7 +16,11 @@ class TestGenerator
 				puts key + ' already has a Test (Test will not be generated)'
 			else
 				if value.is_a? JavaClass
-					generate_test_class value
+					if value.abstract
+						puts key + ' is abstract (Test will not be generated)'
+					else
+						generate_test_class value
+					end
 				end
 			end
 		}
@@ -40,7 +44,6 @@ class TestGenerator
 		template = File.read(File.join(File.dirname(__FILE__), '../../resources/test_class_template.erb'))
 
 		File.open(path_to_class, 'w+') do |file|
-			# use "\n" for two lines of text
 			file << ERB.new(template).result(class_object.template_binding)
 		end
 	end
