@@ -1,12 +1,12 @@
-require 'rjcheck/dsl/controller/dsl_controller'
-require 'rjcheck/dsl/controller/os'
+
+require 'rjcheck/util/os'
 class TestGenerator
 	attr_accessor :java_map
-	attr_accessor :dsl
+	attr_accessor :dsl_model
 
-	def initialize(java_map, dsl)
+	def initialize(java_map, dsl_model)
 		@java_map = java_map
-		@dsl = dsl
+		@dsl_model = dsl_model
 	end
 
 	def generate
@@ -28,10 +28,10 @@ class TestGenerator
 
 		path_to_class = class_object.package.gsub('.', '/')
 		path_to_class = OS.replace_separator path_to_class
-
-		puts "#{@dsl.main_test_folder_path}#{path_to_class}"
-
-		path_to_class = "#{@dsl.main_test_folder_path}#{path_to_class}"
+		#FAIL
+		puts "#{@dsl_model.main_test_folder_path}#{path_to_class}"
+		#FAIL
+		path_to_class = "#{@dsl_model.main_test_folder_path}#{path_to_class}"
 		FileUtils.mkdir_p path_to_class
 		path_to_class = "#{path_to_class}/#{class_object.identifier}Test.java"
 		path_to_class = OS.replace_separator path_to_class

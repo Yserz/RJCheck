@@ -1,13 +1,11 @@
 require 'rjcheck/dsl/attributes/default_attributes.rb'
-require 'rjcheck/dsl/model/dsl_object'
-require 'rjcheck/dsl/controller/os'
+require 'rjcheck/dsl/model/dsl_model'
+require 'rjcheck/util/os'
 require 'rjcheck/controller/main_controller'
-
-#puts DEFAULT.inspect
 
 class DSLController
 
-	attr_accessor :dsl_object
+	attr_accessor :dsl_model
 
 	# generate setter methods to access attributes without @ (neccessary for the recipe)
 	def self.setter(*method_names)
@@ -44,34 +42,30 @@ class DSLController
 	end
 
 	def define_project(path, &block)
-		@dsl_object = DSLObject.new(OS.replace_separator path)
+		@dsl_model = DSLObject.new(OS.replace_separator path)
 		instance_eval(&block)
 
-		@dsl_object.main_source_folder_path						= OS.replace_separator @main_source_folder_path
-		@dsl_object.source_folder_path								= OS.replace_separator @source_folder_path
-		@dsl_object.source_folder_type								= OS.replace_separator @source_folder_type
-		@dsl_object.source_resources_folder_path			= OS.replace_separator @source_resources_folder_path
+		@dsl_model.main_source_folder_path						= OS.replace_separator @main_source_folder_path
+		@dsl_model.source_folder_path								= OS.replace_separator @source_folder_path
+		@dsl_model.source_folder_type								= OS.replace_separator @source_folder_type
+		@dsl_model.source_resources_folder_path			= OS.replace_separator @source_resources_folder_path
 
-		@dsl_object.main_test_folder_path							= OS.replace_separator @main_test_folder_path
-		@dsl_object.test_folder_path									= OS.replace_separator @test_folder_path
-		@dsl_object.test_folder_type									= OS.replace_separator @test_folder_type
-		@dsl_object.test_resources_folder_path				= OS.replace_separator @test_resources_folder_path
+		@dsl_model.main_test_folder_path							= OS.replace_separator @main_test_folder_path
+		@dsl_model.test_folder_path									= OS.replace_separator @test_folder_path
+		@dsl_model.test_folder_type									= OS.replace_separator @test_folder_type
+		@dsl_model.test_resources_folder_path				= OS.replace_separator @test_resources_folder_path
 
-		@dsl_object.entities_package									= OS.replace_separator @entities_package
-		@dsl_object.repositories_package							= OS.replace_separator @repositories_package
-		@dsl_object.manager_package										= OS.replace_separator @manager_package
+		@dsl_model.entities_package									= OS.replace_separator @entities_package
+		@dsl_model.repositories_package							= OS.replace_separator @repositories_package
+		@dsl_model.manager_package										= OS.replace_separator @manager_package
 
-		@dsl_object.generate_test_classes							= @generate_test_classes
+		@dsl_model.generate_test_classes							= @generate_test_classes
 
-		puts "#{@dsl_object.to_s}"
-
-		#		puts self.methods.inspect
+		puts "#{@dsl_model.to_s}"
 
 		controller = MainController.new(self)
 		controller.run
 	end
-
-	
 end
 
 require 'rjcheck/dsl/controller/recipe.rb'

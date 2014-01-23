@@ -1,4 +1,4 @@
-#require_relative '../crawler'
+
 class JavaCrawler
 	attr_accessor :path
   def initialize(path)

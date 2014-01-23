@@ -5,26 +5,31 @@ class MainController
 	attr_accessor :crawler
 	attr_accessor :mapper
 	attr_accessor :analyzer
-	attr_accessor :dsl_object
+	attr_accessor :dsl_model
 	attr_accessor :java_map
 
   def initialize(controller)
 		@java_map = Hash.new()
-		@dsl_object = controller.dsl_object
+		@dsl_model = controller.dsl_model
 		@dsl_controller = controller
-		@crawler = JavaCrawler.new(@dsl_object.project_path)
+		@crawler = JavaCrawler.new(@dsl_model.project_path)
 		@mapper = JavaMapper.new()
-		@analyzer = Analyzer.new()
+
   end
 
 	def run
-		file_list = crawl
+		file_list = crawl()
 		file_list.each { |key,value|  puts "\n\nLOG: key: #{key}\nvalue: #{value}"}
-		map(file_list)
-		@analyzer.analyse(java_map, @dsl_object)
+		@java_map = map(file_list)
+
+		@analyzer = Analyzer.new(@java_map, @dsl_model)
+		@generator = TestGenerator.new(@java_map, @dsl_model)
+
+		analyze()
+		generate_tests()
 	end
 
-	def crawl
+	def crawl()
 		puts "\n\n\n *** Crawl Java ***"
 		file_list = Hash.new()
 		@crawler.crawl {|path,file| file_list[path]=file}
@@ -33,13 +38,17 @@ class MainController
 
   def map(file_list)
     @mapper.map(file_list)
-    @java_map = @mapper.java_map
-
-    if @dsl_object.generate_test_classes
-      generator = TestGenerator.new(@java_map, @dsl_object)
-      generator.generate
-    end
+    @mapper.java_map
   end
 
-	# Analyze Code with @java_map and @dsl
+	def analyze()
+		@analyzer.analyse()
+	end
+
+	def generate_tests()
+		if @dsl_model.generate_test_classes
+      @generator.generate
+    end
+	end
+
 end
