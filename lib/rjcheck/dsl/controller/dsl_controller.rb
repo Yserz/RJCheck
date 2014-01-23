@@ -42,7 +42,7 @@ class DSLController
 	end
 
 	def define_project(path, &block)
-		@dsl_model = DSLObject.new(OS.replace_separator path)
+		@dsl_model = DSLModel.new(OS.replace_separator path)
 		instance_eval(&block)
 
 		@dsl_model.main_source_folder_path						= OS.replace_separator @main_source_folder_path

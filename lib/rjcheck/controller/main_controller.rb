@@ -1,12 +1,13 @@
 require 'rjcheck/generator/java/test_generator'
 require 'rjcheck/analyzer/analyzer'
 class MainController
-	attr_accessor :folder
+	attr_accessor :dsl_controller
 	attr_accessor :crawler
 	attr_accessor :mapper
-	attr_accessor :analyzer
 	attr_accessor :dsl_model
 	attr_accessor :java_map
+	attr_accessor :analyzer
+	attr_accessor :generator
 
   def initialize(controller)
 		@java_map = Hash.new()

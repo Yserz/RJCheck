@@ -1,5 +1,5 @@
 
-class DSLObject
+class DSLModel
   attr_accessor :project_path
 
 	# Sources
