@@ -8,29 +8,29 @@ class MainController
 	attr_accessor :analyzer
 	attr_accessor :generator
 
-  def initialize()
+  def initialize
 		@dsl_model = $RJ.dsl_model
-		@java_map = Hash.new()
+		@java_map = Hash.new
 		@crawler = JavaCrawler.new(@dsl_model.project_path)
-		@mapper = JavaMapper.new()
+		@mapper = JavaMapper.new
   end
 
 	def run
-		file_list = crawl()
+		file_list = crawl
 		file_list.each { |key,value|  puts "\n\nLOG: key: #{key}\nvalue: #{value}"}
 		@java_map = map(file_list)
 
 		@analyzer = Analyzer.new(@java_map, @dsl_model)
 		@generator = TestGenerator.new(@java_map, @dsl_model)
 
-		analyze()
-		generate_tests()
+		analyze
+		generate_tests
 	end
 
 	private
-	def crawl()
+	def crawl
 		puts "\n\n\n *** Crawl Java ***"
-		file_list = Hash.new()
+		file_list = Hash.new
 		@crawler.crawl {|path,file| file_list[path]=file}
 		file_list
 	end
@@ -40,11 +40,11 @@ class MainController
     @mapper.java_map
   end
 
-	def analyze()
-		@analyzer.analyse()
+	def analyze
+		@analyzer.analyse
 	end
 
-	def generate_tests()
+	def generate_tests
 		if @dsl_model.generate_test_classes
       @generator.generate
     end
