@@ -58,7 +58,7 @@ class Analyzer
 	end
 
 	def fail_message(this_full_qualifier, import_file)
-		puts 'Layer Use Fail: '+ this_full_qualifier + ' uses: '+ import_file.package + import_file.identifier
+		puts 'Layer use fail: '+ this_full_qualifier + ' uses: '+ import_file.package + import_file.identifier
 	end
 
 end
