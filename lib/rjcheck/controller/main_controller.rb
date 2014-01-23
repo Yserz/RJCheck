@@ -26,7 +26,8 @@ class MainController
 		analyze()
 		generate_tests()
 	end
-
+	
+private
 	def crawl()
 		puts "\n\n\n *** Crawl Java ***"
 		file_list = Hash.new()
@@ -34,15 +35,18 @@ class MainController
 		file_list
 	end
 
+	private
   def map(file_list)
     @mapper.map(file_list)
     @mapper.java_map
   end
 
+	private
 	def analyze()
 		@analyzer.analyse()
 	end
 
+	private
 	def generate_tests()
 		if @dsl_model.generate_test_classes
       @generator.generate
