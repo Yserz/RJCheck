@@ -8,7 +8,7 @@ class MainController
 	attr_accessor :analyzer
 	attr_accessor :generator
 
-  def initialize()
+  def initialize
 		@dsl_model = $RJ.dsl_model
 		@java_map = Hash.new()
 		@crawler = JavaCrawler.new(@dsl_model.project_path)
