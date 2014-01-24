@@ -12,10 +12,11 @@ class DSLController
     method_names.each do |name|
 			attr_reader name
       send :define_method, name do |data|
-        instance_variable_set "@#{name}".to_sym, data
+				instance_variable_set "@#{name}".to_sym, data if data
       end
     end
   end
+
 
 	setter :project_path
 	setter :main_source_folder_path, :source_folder_path, :source_folder_type, :source_resources_folder_path
@@ -46,19 +47,19 @@ class DSLController
 		@dsl_model = DSLModel.new(OS.replace_separator path)
 		instance_eval(&block)
 
-		@dsl_model.main_source_folder_path						= OS.replace_separator @main_source_folder_path
-		@dsl_model.source_folder_path								= OS.replace_separator @source_folder_path
-		@dsl_model.source_folder_type								= OS.replace_separator @source_folder_type
-		@dsl_model.source_resources_folder_path			= OS.replace_separator @source_resources_folder_path
+		@dsl_model.main_source_folder_path						= OS.replace_separator(path + @main_source_folder_path)
+		@dsl_model.source_folder_path								= OS.replace_separator(path + @main_source_folder_path + @source_folder_path)
+		@dsl_model.source_folder_type								= @source_folder_type
+		@dsl_model.source_resources_folder_path			= OS.replace_separator(path + @main_source_folder_path + @source_resources_folder_path)
 
-		@dsl_model.main_test_folder_path							= OS.replace_separator @main_test_folder_path
-		@dsl_model.test_folder_path									= OS.replace_separator @test_folder_path
-		@dsl_model.test_folder_type									= OS.replace_separator @test_folder_type
-		@dsl_model.test_resources_folder_path				= OS.replace_separator @test_resources_folder_path
+		@dsl_model.main_test_folder_path							= OS.replace_separator(path + @main_test_folder_path)
+		@dsl_model.test_folder_path									= OS.replace_separator(path + @main_test_folder_path + @test_folder_path)
+		@dsl_model.test_folder_type									= @test_folder_type
+		@dsl_model.test_resources_folder_path				= OS.replace_separator(path + @main_test_folder_path + @test_resources_folder_path)
 
-		@dsl_model.entities_package									= OS.replace_separator @entities_package
-		@dsl_model.repositories_package							= OS.replace_separator @repositories_package
-		@dsl_model.manager_package										= OS.replace_separator @manager_package
+		@dsl_model.entities_package									= @entities_package
+		@dsl_model.repositories_package							= @repositories_package
+		@dsl_model.manager_package										= @manager_package
 
 		@dsl_model.generate_test_classes							= @generate_test_classes
 
