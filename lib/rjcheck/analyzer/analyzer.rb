@@ -9,13 +9,13 @@ class Analyzer
 		@dsl_model = dsl_model
   end
 
-  def analyse
+  def analyze
 		# iterate through all java classes
 		# key = package + name, value = java_file
-		@java_map.each { |key,value|  analyse_file(key,value)}
+		@java_map.each { |key,value|  analyze_file(key,value)}
   end
 	private
-	def analyse_file(this_full_qualifier, java_file)
+	def analyze_file(this_full_qualifier, java_file)
 
 		puts 'analyse file: ' + this_full_qualifier
 

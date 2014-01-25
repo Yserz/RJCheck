@@ -41,7 +41,7 @@ class MainController
   end
 
 	def analyze
-		@analyzer.analyse
+		@analyzer.analyze
 	end
 
 	def generate_tests
