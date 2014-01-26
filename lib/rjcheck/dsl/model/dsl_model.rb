@@ -22,8 +22,7 @@ class DSLModel
 	# Flags
 	attr_accessor :generate_test_classes
 
-  def initialize(path)
-    @project_path = path
+  def initialize()
   end
 
 	def to_s

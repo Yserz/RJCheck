@@ -40,31 +40,37 @@ class DSLController
 		manager_package								DEFAULT['manager_package']
 
 		generate_test_classes					DEFAULT['generate_test_classes']
+
+		@dsl_model = DSLModel.new()
 	end
 
-	def define_project(path, &block)
-		puts "executing define_project"
-		@dsl_model = DSLModel.new(OS.replace_separator path)
+	def define_sources(path, &block)
 		instance_eval(&block)
-
-		@dsl_model.main_source_folder_path						= OS.replace_separator(path + @main_source_folder_path)
+		@dsl_model.project_path											= OS.replace_separator path
+		@dsl_model.main_source_folder_path					= OS.replace_separator(path + @main_source_folder_path)
 		@dsl_model.source_folder_path								= OS.replace_separator(path + @main_source_folder_path + @source_folder_path)
 		@dsl_model.source_folder_type								= @source_folder_type
 		@dsl_model.source_resources_folder_path			= OS.replace_separator(path + @main_source_folder_path + @source_resources_folder_path)
 
-		@dsl_model.main_test_folder_path							= OS.replace_separator(path + @main_test_folder_path)
+		#		puts "#{@dsl_model.to_s}"
+
+	end
+
+	def define_tests(path, &block)
+		instance_eval(&block)
+		@dsl_model.generate_test_classes						= @generate_test_classes
+		@dsl_model.main_test_folder_path						= OS.replace_separator(path + @main_test_folder_path)
 		@dsl_model.test_folder_path									= OS.replace_separator(path + @main_test_folder_path + @test_folder_path)
 		@dsl_model.test_folder_type									= @test_folder_type
 		@dsl_model.test_resources_folder_path				= OS.replace_separator(path + @main_test_folder_path + @test_resources_folder_path)
 
+	end
+
+	def define_layers(&block)
+		instance_eval(&block)
 		@dsl_model.entities_package									= @entities_package
 		@dsl_model.repositories_package							= @repositories_package
-		@dsl_model.manager_package										= @manager_package
-
-		@dsl_model.generate_test_classes							= @generate_test_classes
-
-		puts "#{@dsl_model.to_s}"
-
+		@dsl_model.manager_package									= @manager_package
 	end
 end
 
