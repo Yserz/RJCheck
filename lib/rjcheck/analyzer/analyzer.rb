@@ -12,7 +12,7 @@ class Analyzer
   def analyze
 		# iterate through all java classes
 		# key = package + name, value = java_file
-		if !@dsl_model.entities_package.eql?('') && @dsl_model.repositories_package.eql?('') && @dsl_model.manager_package.eql?('')
+		if !@dsl_model.entities_package.eql?('') && !@dsl_model.repositories_package.eql?('') && !@dsl_model.manager_package.eql?('')
 			@java_map.each { |key,value|  analyze_file(key,value)}
 		else
 			puts "Skipping analyse of layers because no layers are defined."
