@@ -1,3 +1,6 @@
+# This file sets the default-attributes for every project which will be analysed by RJCheck.
+# The default-attributes will be overwritten by the user-attributes attributes.
+
 DEFAULT = {}
 DEFAULT['main_source_folder'] = Hash.new
 DEFAULT['main_source_folder']['source_folder'] = Hash.new

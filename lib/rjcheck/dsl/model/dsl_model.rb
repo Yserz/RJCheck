@@ -1,4 +1,6 @@
 
+# This class represents the attributes that are given from the DSL.
+# It discribes the structure of the project which will be analysed.
 class DSLModel
   attr_accessor :project_path
 
