@@ -6,7 +6,7 @@ NODE['main_test_folder'] = Hash.new
 NODE['main_test_folder']['test_folder'] = Hash.new
 NODE['main_test_folder']['test_resources_folder'] = Hash.new
 
-NODE['path']																											= "/Users/MacYser/Documents/Workspaces/NetBeansWorkspace/JavaTestApp/"
+NODE['path']																											= "/Users/MacYser/Documents/Workspaces/NetBeansWorkspace/RJCheckExample/"
 #NODE['path']																											= 'path/to/project_folder'
 #NODE['main_source_folder']['path']																= NODE['path'].to_s + 'src/main/'
 #NODE['main_source_folder']['source_folder']['path']								= NODE['main_source_folder']['path'].to_s + 'java/'
@@ -19,8 +19,8 @@ NODE['path']																											= "/Users/MacYser/Documents/Workspaces/Ne
 #NODE['main_test_folder']['test_resources_folder']['path']					= NODE['main_test_folder']['path'].to_s + 'resources/'
 
 
-NODE['entities_package']										= 'com.example.entity'
-NODE['repositories_package']									= 'com.example.repository'
-NODE['manager_package']											= 'com.example.manager'
+NODE['entities_package']										= 'de.fhb.rjcheckexample.entity'
+NODE['repositories_package']									= 'de.fhb.rjcheckexample.repositoryfail'
+NODE['manager_package']											= 'de.fhb.rjcheckexample.manager'
 
 NODE['generate_test_classes']									= true
