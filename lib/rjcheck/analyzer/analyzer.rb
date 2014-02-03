@@ -1,14 +1,18 @@
 
+# This class is responsible for analyzing layer seperation in classes 
+# only if the user has set the <entities_package>, <repositories_package>, <manager_package> values in the user_attributes
 class Analyzer
 
 	attr_accessor :java_map
 	attr_accessor :dsl_model
 
+	
   def initialize(java_map, dsl_model)
     @java_map = java_map
 		@dsl_model = dsl_model
   end
 
+	#analyze all classes in project, uses the java_map from mapper and dsl_model from user_attributes
   def analyze
 		# iterate through all java classes
 		# key = package + name, value = java_file
@@ -19,18 +23,22 @@ class Analyzer
 			puts "Skipping analyse of layers because no layers are defined."
 		end
   end
+	
+	
+	#analyse one single java class and its imports for layer speration
+	#with full name - this_full_qualifier(package.classname) and the mapped java_file
 	private
 	def analyze_file(this_full_qualifier, java_file)
-
 		puts "\nanalyse file: " + this_full_qualifier
 
 		this_is_entity = false
 		this_is_repository = false
-		this_is_manager = false
+		#not required
+		#this_is_manager = false
 
-		entities_package = @dsl_model.entities_package
-		repositories_package = @dsl_model.repositories_package
-		manager_package = @dsl_model.manager_package
+		entities_package = @dsl_model.entities_package + "."
+		repositories_package = @dsl_model.repositories_package + "."
+		manager_package = @dsl_model.manager_package + "."
 
 		#analyse this file package
 		if this_full_qualifier.include? entities_package
@@ -40,7 +48,8 @@ class Analyzer
 			this_is_repository = true
 			puts '  this is repository '
 		elsif this_full_qualifier.include? manager_package
-			this_is_manager = true
+			#not required
+			#this_is_manager = true
 			puts '  this is manager '
 		end
 
@@ -69,7 +78,8 @@ class Analyzer
 		end
 	end
 
-
+	# get the failmessage of layer use fail
+	private
 	def fail_message(this_full_qualifier, import_file)
 		puts "LAYER FAIL!: \n  "+ this_full_qualifier + "\n  uses: "+ import_file.package + import_file.identifier
 	end
