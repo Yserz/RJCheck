@@ -6,7 +6,7 @@ require 'rjcheck/meta_model/java/java_interface'
 require 'rjcheck/meta_model/java/java_with_generic'
 require 'rjcheck/meta_model/java/method'
 
-require 'rjcheck/analyzer/analyzer'
+require 'rjcheck/analyzer/java/analyzer'
 require 'rjcheck/crawler/java/java_crawler'
 require 'rjcheck/mapper/java/java_mapper'
 

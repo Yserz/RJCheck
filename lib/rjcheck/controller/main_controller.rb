@@ -1,5 +1,5 @@
 require 'rjcheck/generator/java/test_generator'
-require 'rjcheck/analyzer/analyzer'
+require 'rjcheck/analyzer/java/analyzer'
 
 # This class is responsible for all actions of RJCheck.
 # It provides methods to access all components of RJCheck.
@@ -31,7 +31,6 @@ class MainController
 	#
 	def run
 		file_list = crawl
-		file_list.each { |key,value|  puts "\n\nLOG: key: #{key}\nvalue: #{value}"}
 		@java_map = map(file_list)
 
 		@analyzer = Analyzer.new(@java_map, @dsl_model)
