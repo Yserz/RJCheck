@@ -120,8 +120,10 @@ class JavaMapper
 		# save searched information into current class object
 		if object != nil
 			
-			if object.respond_to?("extends")
-				object.extends = extends
+			if extends != nil
+				if object.respond_to?("extends")
+					object.extends = extends
+				end
 			end
 			
 			if object.imports == nil
@@ -157,7 +159,7 @@ class JavaMapper
 
 	# extract the extends
 	def mapextends(content)
-		extends =''
+		extends = nil
 		class_regex = Regexp.new(EXTENDS_SIGNATURE,Regexp::MULTILINE)
 		if content.match(class_regex)
 			match = class_regex.match(content)

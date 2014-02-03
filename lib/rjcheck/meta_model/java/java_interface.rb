@@ -15,7 +15,11 @@ class JavaInterface < JavaWithGeneric
 	def output
 		super
 		if @extends != nil
-			@extends.each do |item|
+			if @extends.respond_to?('each')
+				@extends.each do |item|
+				puts "Extends: #{@extends.identifier}"
+				end
+			else
 				puts "Extends: #{@extends.identifier}"
 			end
 		end
