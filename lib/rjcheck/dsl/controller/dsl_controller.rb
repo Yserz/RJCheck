@@ -51,6 +51,9 @@ class DSLController
 	# This method defines the path to the project and the source-structure of the project to analyse.
 	# It recives a block of code from the DSL which will be executed to overwrite the default-attributes.
 	def define_sources(path, &block)
+		if not path
+			raise Exception.new("Definition of projectpath is missing!")
+		end
 		instance_eval(&block)
 		@dsl_model.project_path											= OS.replace_separator path
 		@dsl_model.main_source_folder_path					= OS.replace_separator(path + @main_source_folder_path)
