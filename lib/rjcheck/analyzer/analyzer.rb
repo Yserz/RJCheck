@@ -12,6 +12,7 @@ class Analyzer
   def analyze
 		# iterate through all java classes
 		# key = package + name, value = java_file
+		puts " \n  *** Analyze Classes *** "
 		if !@dsl_model.entities_package.eql?('') && !@dsl_model.repositories_package.eql?('') && !@dsl_model.manager_package.eql?('')
 			@java_map.each { |key,value|  analyze_file(key,value)}
 		else
@@ -30,34 +31,51 @@ class Analyzer
 		entities_package = @dsl_model.entities_package
 		repositories_package = @dsl_model.repositories_package
 		manager_package = @dsl_model.manager_package
+		
+		test = 'de.fhb.rjcheckexample.manager.AccountManagerLocal'
+		if test.include? 'de.fhb.rjcheckexample.manager'
+			puts 'realllly'
+		end
 
 		#analyse this file package
 		if this_full_qualifier.include? entities_package
 			this_is_entity = true
+			puts 'this_is_entity: ' + this_full_qualifier
 		elsif this_full_qualifier.include? repositories_package
 			this_is_repository = true
+			puts 'this_is_repository: ' + this_full_qualifier
 		elsif this_full_qualifier.include? manager_package
 			this_is_manager = true
+			puts 'this_is_manager: ' + this_full_qualifier
 		end
 
 		#analyse import files package
+		#if java_file.imports == nil
+		#			puts 'java_file.imports  NIL' ;
+		#end
+
+		
 		if java_file.imports != nil
 			java_file.imports.each { |import_file|
+				
+				puts 'import: '+ import_file.package
 				if this_is_entity
 					#entity is not allowed to use manager and repository
-					if java_file.package.include? repositories_package
+					if import_file.package.include? repositories_package
 						fail_message(this_full_qualifier, import_file)
-					elsif java_file.package.include? manager_package
+					elsif import_file.package.include? manager_package
 						fail_message(this_full_qualifier, import_file)
 					end
 				elsif this_is_repository
 					#repository is not allowed to use manager
-					if java_file.package.include? manager_package
+					if import_file.package.include? manager_package
 						fail_message(this_full_qualifier, import_file)
 					end
 				end
 				#manager is allowed to use everything
 			}
+		else
+			puts 'java_file.imports  NIL' ;
 		end
 	end
 
