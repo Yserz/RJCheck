@@ -1,6 +1,11 @@
 require 'rjcheck/util/os'
+
+# This class is responsible for generating test classes if the user has set the <generate_test_classes>
+# value to true in the user_attributes
 class TestGenerator
+	# all mapped java_files
 	attr_accessor :java_map
+	# the dsl model which contains the paths for the test classes
 	attr_accessor :dsl_model
 
 	def initialize(java_map, dsl_model)
@@ -8,6 +13,7 @@ class TestGenerator
 		@dsl_model = dsl_model
 	end
 
+	# Generates all test classes if the requirements are satisfied
 	def generate
 		puts '####### Generation of TestClasses begins'
 		@java_map.each { |key, value|
@@ -24,6 +30,7 @@ class TestGenerator
 	end
 
 	private
+	# Generates a test class depending on the class_object
 	def generate_test_class(class_object)
 		puts '####### generate Test for: ' +class_object.identifier
 
