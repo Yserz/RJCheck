@@ -22,7 +22,7 @@ class Analyzer
 	private
 	def analyze_file(this_full_qualifier, java_file)
 
-		puts 'analyse file: ' + this_full_qualifier
+		puts "\nanalyse file: " + this_full_qualifier
 
 		this_is_entity = false
 		this_is_repository = false
@@ -31,34 +31,24 @@ class Analyzer
 		entities_package = @dsl_model.entities_package
 		repositories_package = @dsl_model.repositories_package
 		manager_package = @dsl_model.manager_package
-		
-		test = 'de.fhb.rjcheckexample.manager.AccountManagerLocal'
-		if test.include? 'de.fhb.rjcheckexample.manager'
-			puts 'realllly'
-		end
 
 		#analyse this file package
 		if this_full_qualifier.include? entities_package
 			this_is_entity = true
-			puts 'this_is_entity: ' + this_full_qualifier
+			puts '  this is entity '
 		elsif this_full_qualifier.include? repositories_package
 			this_is_repository = true
-			puts 'this_is_repository: ' + this_full_qualifier
+			puts '  this is repository '
 		elsif this_full_qualifier.include? manager_package
 			this_is_manager = true
-			puts 'this_is_manager: ' + this_full_qualifier
+			puts '  this is manager '
 		end
 
-		#analyse import files package
-		#if java_file.imports == nil
-		#			puts 'java_file.imports  NIL' ;
-		#end
-
-		
+		#analyse imports
 		if java_file.imports != nil
 			java_file.imports.each { |import_file|
 				
-				puts 'import: '+ import_file.package
+				puts '  import: '+ import_file.package
 				if this_is_entity
 					#entity is not allowed to use manager and repository
 					if import_file.package.include? repositories_package
@@ -75,13 +65,13 @@ class Analyzer
 				#manager is allowed to use everything
 			}
 		else
-			puts 'java_file.imports  NIL' ;
+			puts '  imports are NIL' ;
 		end
 	end
 
 
 	def fail_message(this_full_qualifier, import_file)
-		puts 'Layer use fail: '+ this_full_qualifier + ' uses: '+ import_file.package + import_file.identifier
+		puts "LAYER FAIL!: \n  "+ this_full_qualifier + "\n  uses: "+ import_file.package + import_file.identifier
 	end
 
 end
