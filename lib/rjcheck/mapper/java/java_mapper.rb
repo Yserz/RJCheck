@@ -1,5 +1,6 @@
 require 'imports'
 
+# This class map java-files of the meta-model from rjcheck
 class JavaMapper
 	# matches \*package\*
 	PACKAGE_SIGNATURE = "package\s([a-zA-Z0-9.]+);"
@@ -34,17 +35,19 @@ class JavaMapper
 
 	attr_accessor :java_map
 
+	# contructor
 	def initialize
     @java_map = Hash.new()
   end
 
+	# this method map the java-file
 	def map(file_list)
-		# TODO scan list
     file_list.each { |key,value|  pre_mapping(value)}
 		file_list.each { |key,value|  map_file(key,value)}
 	end
+	
 	private
-	# creates entries in @java_map for mapping method
+	# creates basic-entries in @java_map for mapping method
   def pre_mapping(text)
     # read out package, name, typ
 
@@ -71,10 +74,6 @@ class JavaMapper
         visibility = match[2]
         type = match[3]
         name = match[4]
-				#puts "text: #{text}"
-				#puts "visibility: #{visibility}"
-				#puts "type: #{type}"
-				#puts "name: #{name}"
       end
 
       if /\sfinal\s/.match(text)
@@ -102,48 +101,73 @@ class JavaMapper
 
 	end
 
-	#before using map_file it is fundamental to use pre_mapping
-	def map_file(path, text)
-
-		annotations = Array.new
-		implements = Array.new
+	#creates relations between objects of the meta-modell
+	def map_file(path, text)	
 		import=Array.new
 		extends = nil
-		generics = nil
-
-		#TODO annotations
-		#TODO generics
-		#TODO extends
 
 		#search for extends
-		class_regex = Regexp.new(EXTENDS_SIGNATURE,Regexp::MULTILINE)
-		if text.match(class_regex)
-			match = class_regex.match(text)
-			if match
-				extends = match[1]
-				puts "extends: #{extends}"
-				#TODO find object
-			end
-		end
-
-		#search for implements
-		class_regex = Regexp.new(IMPLEMENTS_SIGNATURE,Regexp::MULTILINE)
-		if text.match(class_regex)
-			match = text.scan(class_regex)
-			if match
-				match.each do |i|
-					i.each do |j|
-						implements.push(j)
-						#puts "Implements: #{implements}"
-					end
-				end
-			end
-		end
+		extends = mapextends(text)		
 
 		#search for imports
+		import = mapimports(text)
+
+		#search for fullpathname
+		fullname = getfullname(text)
+		
+		# get the object in array for current class
+		object = @java_map[fullname]
+		# save searched information into current class object
+		if object != nil
+			if object.imports == nil
+				if import.size > 0
+					object.imports = Array.new
+				end
+			end
+
+			import.each do |i|
+				help = @java_map[i]
+				if help != nil
+					object.imports.push(help)
+				end
+			end
+
+			if object.imports != nil
+				if object.imports.size == 0
+					object.imports = nil
+				end
+			end
+				
+			# prints out the mapped paramter
+			object.output
+
+		elsif text.scan(/.*/)
+			warn 'Matches everything'
+			warn "#{path} ==> \n#{text.match(class_regex)}"
+		else
+			warn 'matches nothing'
+		end
+		object
+	end
+
+	# extract the extends
+	def mapextends(content)
+		class_regex = Regexp.new(EXTENDS_SIGNATURE,Regexp::MULTILINE)
+		if content.match(class_regex)
+			match = class_regex.match(content)
+			if match
+				extends = match[1]
+				extends
+			end
+		end
+	end
+	
+	# extract the imports
+	def mapimports(content)
 		class_regex = Regexp.new(IMPORT_SIGNATURE,Regexp::MULTILINE)
-		if text.match(class_regex)
-			match = text.scan(class_regex)
+		import = Array.new()
+		if content.match(class_regex)
+			match = content.scan(class_regex)
 			if match
 				match.each do |i|
 					i.each do |j|
@@ -152,7 +176,11 @@ class JavaMapper
 				end
 			end
 		end
-
+		import
+	end
+	
+	# get the fullpathname of the java-file
+	def getfullname(text)
 		#search for package
 		package = ''
 		class_regex = Regexp.new(PACKAGE_SIGNATURE,Regexp::MULTILINE )
@@ -174,63 +202,11 @@ class JavaMapper
 				name = match[4]
 				#puts "Class-Name: #{name}"
 			end
-
-			# get the object in array for current class
-			object = @java_map[package+'.'+name]
-			# save searched iformations into current class object
-			if object != nil
-				if object.imports == nil
-					if import.size > 0
-						object.imports = Array.new
-					end
-				end
-
-				import.each do |i|
-          help = @java_map[i]
-          if help != nil
-            object.imports.push(help)
-          end
-        end
-
-				if object.imports != nil
-					if object.imports.size == 0
-						object.imports = nil
-					end
-				end
-
-				if object.respond_to?('implements')
-					if object.implements == nil
-						if implements.size > 0
-							object.implements = Array.new
-						end
-					end
-					implements.each do |i|
-						help = @java_map[i]
-						if help != nil
-							object.implements.push(help)
-						end
-					end
-				end
-
-
-				# prints out the mapped paramter
-				object.output
-			end
-
-
-
-			groups = text.scan(class_regex)
-			#                        groups.each { |i| puts i }
-			#                        puts groups.last
-		elsif text.scan(/.*/)
-			warn 'Matches everything'
-			warn "#{path} ==> \n#{text.match(class_regex)}"
-		else
-			warn 'matches nothing'
 		end
-		object
+		return package+'.'+name
 	end
-
+	
+	# find the java-file from the meta-model
 	def find_java_file(ikey)
 		@java_map[ikey]
 	end
