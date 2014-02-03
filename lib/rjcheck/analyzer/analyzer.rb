@@ -62,14 +62,14 @@ class Analyzer
 				if this_is_entity
 					#entity is not allowed to use manager and repository
 					if full_file_name.include? repositories_package
-						fail_message(this_full_qualifier, import_file)
+						fail_message(this_full_qualifier, full_file_name)
 					elsif full_file_name.include? manager_package
-						fail_message(this_full_qualifier, import_file)
+						fail_message(this_full_qualifier, full_file_name)
 					end
 				elsif this_is_repository
 					#repository is not allowed to use manager
 					if full_file_name.include? manager_package
-						fail_message(this_full_qualifier, import_file)
+						fail_message(this_full_qualifier, full_file_name)
 					end
 				end
 				#manager is allowed to use everything
@@ -81,8 +81,8 @@ class Analyzer
 
 	# get the failmessage of layer use fail
 	private
-	def fail_message(this_full_qualifier, import_file)
-		puts "LAYER FAIL!: \n  "+ this_full_qualifier + "\n  uses: "+ import_file.package + import_file.identifier
+	def fail_message(this_full_qualifier, full_file_name)
+		puts "LAYER FAIL!: \n  "+ this_full_qualifier + "\n  uses: "+ full_file_name
 	end
 
 end
