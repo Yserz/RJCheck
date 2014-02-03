@@ -1,38 +1,39 @@
-
 require_relative('java_with_generic')
 require 'erb'
+# Represents the structure of a java class
 class JavaClass < JavaWithGeneric
 
-  # boolean
+	# represents the state of the class whether it is abstract or not
 	attr_accessor :abstract
-  # boolean
-  attr_accessor :final
-  # List<JavaInterface>
+	# represents the state of the class whether it is final or not
+	attr_accessor :final
+	# the list of interfaces which are implemented in the class
 	attr_accessor :implements
-  # JavaClass
+	# the JavaClass which is extended
 	attr_accessor :extends
 
-  def initialize(package, visibility, imports, identifier, annotations, abstract, final, implements, extends, generics)
-    super(package, visibility, imports, identifier, annotations, generics)
-    @abstract = abstract
-    @final = final
-    @implements = implements
-    @extends = extends
-  end
+	# All args constructor
+	def initialize(package, visibility, imports, identifier, annotations, abstract, final, implements, extends, generics)
+		super(package, visibility, imports, identifier, annotations, generics)
+		@abstract = abstract
+		@final = final
+		@implements = implements
+		@extends = extends
+	end
 
-
+	# Prints the actual fields of the class
 	def output
 		super
-		
-    if @extends != nil
-      puts "Extends: #{@extends}"
-    end
-		
-    if @final != nil
-      puts "Final: #{@final}"
-    end
-    
-    if @abstract != nil
+
+		if @extends != nil
+			puts "Extends: #{@extends}"
+		end
+
+		if @final != nil
+			puts "Final: #{@final}"
+		end
+
+		if @abstract != nil
 			puts "Abstract: #{@abstract}"
 		end
 
@@ -43,6 +44,7 @@ class JavaClass < JavaWithGeneric
 		end
 	end
 
+	# Returns a Binding object, describing the variable and method bindings at the point of call.
 	def template_binding
 		binding
 	end

@@ -1,7 +1,10 @@
 require_relative('java_file')
+
+# Represents a java enumeration
 class JavaEnum < JavaFile
 
-  def initialize(package, visibility, imports, identifier, annotations)
-    super(package, visibility, imports, identifier, annotations)
-  end
+	# All args constructor
+	def initialize(package, visibility, imports, identifier, annotations)
+		super(package, visibility, imports, identifier, annotations)
+	end
 end
