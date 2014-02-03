@@ -3,6 +3,8 @@ require 'rjcheck/dsl/model/dsl_model'
 require 'rjcheck/util/os'
 require 'rjcheck/controller/main_controller'
 
+# This class is responsible for controlling all DSL-related actions.
+# E.g. reading the DSL and overwriting the default-attributes with the user-attributes.
 class DSLController
 
 	attr_accessor :dsl_model
@@ -24,6 +26,8 @@ class DSLController
 	setter :entities_package, :repositories_package, :manager_package
 	setter :generate_test_classes
 
+	# The Default-Constructor initializes the DSL-values with the default-attributes.
+	# The default-values will may be overwritten by the user-attributes.
 	def initialize
 		main_source_folder_path				DEFAULT['main_source_folder']['path']
 		source_folder_path						DEFAULT['main_source_folder']['source_folder']['path']
@@ -44,6 +48,8 @@ class DSLController
 		@dsl_model = DSLModel.new()
 	end
 
+	# This method defines the path to the project and the source-structure of the project to analyse.
+	# It recives a block of code from the DSL which will be executed to overwrite the default-attributes.
 	def define_sources(path, &block)
 		instance_eval(&block)
 		@dsl_model.project_path											= OS.replace_separator path
@@ -56,6 +62,8 @@ class DSLController
 
 	end
 
+	# This method defines the test-structure of the project to analyse.
+	# It recives a block of code from the DSL which will be executed to overwrite the default-attributes.
 	def define_tests(path, &block)
 		instance_eval(&block)
 		@dsl_model.generate_test_classes						= @generate_test_classes
@@ -66,6 +74,8 @@ class DSLController
 
 	end
 
+	# This method defines the layers of the project to analyse.
+	# It recives a block of code from the DSL which will be executed to overwrite the default-attributes.
 	def define_layers(&block)
 		instance_eval(&block)
 		@dsl_model.entities_package									= @entities_package
@@ -74,5 +84,6 @@ class DSLController
 	end
 end
 
+# Loads the DSL and executes the methods to set the values of the DSL.
 require 'rjcheck/dsl/controller/recipe.rb'
 

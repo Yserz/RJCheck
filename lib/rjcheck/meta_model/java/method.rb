@@ -1,4 +1,5 @@
-
+# Represents the structure of a java method
+# (not being used yet)
 class Method
 	attr_accessor :visability
 	attr_accessor :name
@@ -8,7 +9,8 @@ class Method
 	attr_accessor :attributes
 	attr_accessor :parameters
 	attr_accessor :throws
-  def initialize
 
-  end
+	def initialize
+
+	end
 end

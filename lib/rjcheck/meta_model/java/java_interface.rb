@@ -1,19 +1,21 @@
 require_relative('java_with_generic')
+# Represents the structure of a java interface
 class JavaInterface < JavaWithGeneric
 
-  # List<JavaInterface>
-  attr_accessor :extends
+	# a list of java interfaces which are extended
+	attr_accessor :extends
 
-  def initialize(package, visibility, imports, identifier, annotations, generic, extends)
-    super(package, visibility, imports, identifier, annotations, generic)
-    @extends = extends
-  end
+	# All args constructor
+	def initialize(package, visibility, imports, identifier, annotations, generic, extends)
+		super(package, visibility, imports, identifier, annotations, generic)
+		@extends = extends
+	end
 
+	# Prints the actual fields of the class
 	def output
-
 		super
 		if @extends != nil
-				@extends.each do |item|
+			@extends.each do |item|
 				puts "Extends: #{@extends.identifier}"
 			end
 		end

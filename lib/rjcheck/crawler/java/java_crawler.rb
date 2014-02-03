@@ -1,10 +1,11 @@
-
+# This class is responsible for recursively reading all java-files in a given folder.
 class JavaCrawler
 	attr_accessor :path
   def initialize(path)
 		@path = path
   end
 
+	# This method will recursively read all java-files in the given folder.
 	def crawl
 		chdir
 
@@ -20,6 +21,7 @@ class JavaCrawler
 		end
 	end
 	private
+	# This method will change the dir to the given folder.
 	def chdir
 		begin
 			Dir.chdir(@path)
