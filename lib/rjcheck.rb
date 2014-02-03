@@ -6,14 +6,14 @@ require 'imports'
 
 
 # RJCheck Doku
-class Main
+class RJCheck
 	include Imports
 
 	def initialize
 		controller = MainController.new()
 		controller.run
 	end
-	Main.new()
+	RJCheck.new()
 end
 
 
