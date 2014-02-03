@@ -13,7 +13,8 @@ NODE['main_test_folder']['test_resources_folder'] = Hash.new
 # Paths have to be expresses with '/'!
 # Please note the '/' on the end of the path.
 # For windows use e.g.: 'C:/Users/User/Desktop/Project/'
-NODE['path']																											= "D:/Eigene Dateien/Eigene Dokumente/NetBeansProjects/RubyTest"
+#NODE['path']																											= "D:/Eigene Dateien/Eigene Dokumente/NetBeansProjects/RubyTest"
+NODE['path']																											= "/Users/MacYser/Documents/Workspaces/NetBeansWorkspace/RJCheckExample/"
 
 NODE['entities_package']																					= 'de.fhb.rjcheckexample.entity'
 NODE['repositories_package']																			= 'de.fhb.rjcheckexample.repositoryfail'
