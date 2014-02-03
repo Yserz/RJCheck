@@ -58,16 +58,17 @@ class Analyzer
 			java_file.imports.each { |import_file|
 				
 				puts '  import: '+ import_file.package
+				full_file_name = import_file.package + "." + import_file.identifier
 				if this_is_entity
 					#entity is not allowed to use manager and repository
-					if import_file.package.include? repositories_package
+					if full_file_name.include? repositories_package
 						fail_message(this_full_qualifier, import_file)
-					elsif import_file.package.include? manager_package
+					elsif full_file_name.include? manager_package
 						fail_message(this_full_qualifier, import_file)
 					end
 				elsif this_is_repository
 					#repository is not allowed to use manager
-					if import_file.package.include? manager_package
+					if full_file_name.include? manager_package
 						fail_message(this_full_qualifier, import_file)
 					end
 				end
