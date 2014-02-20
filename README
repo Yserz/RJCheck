@@ -1,6 +1,6 @@
 == RJCheck
 
-RJCheck checks the architecture of software.
+RJCheck checks the architecture of a EJB project.
 
 == Install
 - clone the git repo with 'git clone <git_repo_adress>'
